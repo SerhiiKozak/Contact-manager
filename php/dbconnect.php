@@ -14,6 +14,3 @@ $dbname='Contacts';
     {
       echo "Connection failed: " . $e->getMessage();
     }
-
-
- ?>
