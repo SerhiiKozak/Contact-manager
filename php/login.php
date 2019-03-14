@@ -2,25 +2,50 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-        <link rel="stylesheet" href="/css/main.css">
     <title>Login</title>
   </head>
   <body>
-    <form class="flogin" action="php/userlogin.php" method="post">
-      <h2>Login form</h2>
-      <table>
+    <header>
+      <table class="htable">
         <tr>
-          <td>Login</td>
+          <td>Contact Manager</td>
+        </tr>
+      </table>
+      <form class="authorization" action="../index.php" method="post">
+              <input class="button" type="submit" name="Authorization" value="Authorization">
+      </form>
+      <form class="home" action="../event.php" method="post">
+              <input class="button" type="submit" name="Login" value="Home">
+      </form>
+      <form class="registration" action="php/registration.php" method="post">
+              <input class="button" type="submit" name="registration" value="Registration">
+      </form>
+    </header>
+    <form  class="loginform" class="flogin" action="php/userlogin.php" method="post">
+      <h3>Autorization</h3>
+      <table class="logintable">
+        <tr>
+          <td>Login:</td>
           <td><input type="text" name="login"></td>
         </tr>
         <tr>
-          <td>Password</td>
+          <td>Password:</td>
           <td><input type="text" name="password"></td>
         </tr>
         <tr>
+          <td></td>
+          <td> <a href="">Forgot Password?</a> </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><a href="http://localhost/php/registration.php">Register Now!</a></td>
+        </tr>
+        <tr>
+          <td></td>
           <td><input type="submit"  value="Login"></td>
         </tr>
       </table>
     </form>
   </body>
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
 </html>

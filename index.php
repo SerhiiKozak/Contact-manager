@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
   <head>
-    <meta charset="utf-8">
+    <meta>
     <title>Contacts</title>
   </head>
   <body>
-<!--    <header>
-      <h1>Welcome!</h1>
-    </header>-->
+    <header>
+      <table class="htable">
+        <tr>
+          <td>Contact Manager</td>
+        </tr>
+      </table>
+      <form class="authorization" action="index.html" method="post">
+              <input class="button" type="submit" name="Authorization" value="Authorization">
+      </form>
+      <form class="home" action="event.php" method="post">
+              <input class="button" type="submit" name="Login" value="Home">
+      </form>
+      <form class="registration" action="php/registration.php" method="post">
+              <input class="button" type="submit" name="registration" value="Registration">
+      </form>
+    </header>
       <?php
         $authorized =false;
         if($authorized==true){
@@ -25,5 +38,9 @@
         <input type="submit"  name="registration" value="Registration">
       </form>-->
   </body>
-  <link rel="stylesheet" href="/css/main.css">
+  <footer>
+    <p>2007 Wise Engineering</p>
+  </footer>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
 </html>
