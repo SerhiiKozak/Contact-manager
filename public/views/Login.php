@@ -11,13 +11,13 @@
           <td>Contact Manager</td>
         </tr>
       </table>
-      <form class="authorization" action="../index.php" method="post">
+      <form class="authorization" action="index.php" method="post">
               <input class="button" type="submit" name="Authorization" value="Authorization">
       </form>
-      <form class="home" action="../event.php" method="post">
+      <form class="home" action="event.php" method="post">
               <input class="button" type="submit" name="Login" value="Home">
       </form>
-      <form class="registration" action="php/registration.php" method="post">
+      <form class="registration" action="registration.php" method="post">
               <input class="button" type="submit" name="registration" value="Registration">
       </form>
     </header>
@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><a href="http://contactmanager/php/registration.php">Register Now!</a></td>
+          <td><a href="http://contactmanager/registration.php">Register Now!</a></td>
         </tr>
         <tr>
           <td></td>
@@ -47,5 +47,5 @@
       </table>
     </form>
   </body>
-  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" type="text/css" href="../public/css/main.css">
 </html>
