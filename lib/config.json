@@ -1,0 +1,6 @@
+{
+  dbName: "Contacts",
+  hostName: "localhost",
+  userName: "root",
+  passCode: ""
+}
