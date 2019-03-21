@@ -1,8 +1,8 @@
 <?php
 require_once 'model.php';
 
-class EventModel extends Model
-{
+class EventModel extends Model {
+
   public function addContact() {
 
     $firstName=$_POST['firstname'];
@@ -23,5 +23,5 @@ class EventModel extends Model
 
     Model::createConnect($sql);
   }
-
+  
 }

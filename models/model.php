@@ -1,7 +1,8 @@
 <?php
+
 require_once (LIB_PATH.'/SqlClass.php');
-  class Model
-  {
+
+  class Model {
     public function createConnect($query) {
       $sql = $query;
       $sqlClass = new SqlClass;

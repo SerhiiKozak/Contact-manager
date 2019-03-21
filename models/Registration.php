@@ -1,8 +1,8 @@
 <?php
 require_once 'model.php';
 
-class RegistrationModel extends Model
-{
+class RegistrationModel extends Model {
+
     public function createUser(){
 
       $firstName= $_POST['firstname'];;
@@ -17,7 +17,7 @@ class RegistrationModel extends Model
               VALUES ('$firstName', '$lastName', '$login', '$email', '$password' );";
               Model::createConnect($sql);
       }
-      
+
     }
 
 }

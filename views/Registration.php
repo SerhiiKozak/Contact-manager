@@ -8,7 +8,7 @@
   </head>
   <body>
     <h2>Registration Form</h2>
-    <form class="fregistration" action="lib/SqlClass.php" method="post">
+    <form class="fregistration" action="../controller/Registration.php" method="post">
       <table>
         <tr>
           <td>First Name</td>
