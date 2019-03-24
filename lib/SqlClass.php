@@ -1,7 +1,7 @@
 <?php
+
 require_once 'Log.php';
 require_once 'Query.php';
-
 
 class SqlClass {
 
@@ -10,10 +10,10 @@ class SqlClass {
   private $userName;
   private $passCode;
 
-  function __construct() {
-    $confpath=ROOT_PATH.'/lib/config.json';
+  private function __construct() {
+    $confpath=ROOT_PATH. '/lib/config.json';
     $jsonconfig=file_get_contents($confpath);
-    $config=json_decode($jsonconfig,true);
+    $config=json_decode($jsonconfig, true);
 
     $this->databaseName = $config["dbName"];
     $this->hostName = $config["hostName"];
@@ -21,23 +21,15 @@ class SqlClass {
     $this->passCode = $config["passCode"];
   }
 
-   function dbConnect() {
+   protected function dbConnect() {
     try {
-        $con=new PDO('mysql:host='.$this->$hostName.';dbname='.$this->$databaseName , $this->$userName , $this->$passCode);
-        $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $db = new PDO('mysql:host=' . $this->$hostName . ';dbname=' . $this->$databaseName, $this->$userName , $this->$passCode);
+        $db->serAttribute(PDO::ATTR_EMULATE_PREPARES, fals);
+        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       } catch(PDOException $e) {
-        Log::writeLog('error',$e->getMessage());
+        Log::writeLog('error', $e->getMessage());
       }
-      return $con;
+      return $db;
   }
 
-  function query($con,$sql) {
-    $con=$con;
-    $sql=$sql;
-    try {
-      $con->exec($sql);
-    } catch(PDOException $e) {
-      Log::writeLog('error',$e->getMessage());
-    }
-  }
 }
