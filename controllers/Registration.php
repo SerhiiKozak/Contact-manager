@@ -1,7 +1,7 @@
 <?php
 
-  require_once 'Controller.php';
-  require_once (ROOT_PATH. '/models/Registration.php');
+  require_once ROOT_PATH . 'Controller.php';
+  require_once ROOT_PATH . '/models/Registration.php';
 
   $regmod = new RegistrationModel;
 
@@ -14,3 +14,4 @@
 
   $registration = new Registration ;
   $registration->newUserAccept($regmod);
+  $registration->CreateView('Registration');

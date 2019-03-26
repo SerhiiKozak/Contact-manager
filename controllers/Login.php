@@ -1,7 +1,7 @@
 <?php
 
-  require_once 'Controller.php';
-  require_once (ROOT_PATH. '/models/Login.php');
+  require_once ROOT_PATH . 'Controller.php';
+  require_once ROOT_PATH . '/models/Login.php';
 
   $logmod = new LoginModel;
 
@@ -13,5 +13,6 @@
 
   }
 
-  $login= new Login;
+  $login = new Login;
   $login->loginAccept($logmod);
+  $login->CreateView('Login');

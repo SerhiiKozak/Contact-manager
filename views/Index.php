@@ -28,7 +28,7 @@
         if($authorized==true){
             echo '<h1>User Home page</h1>';
           }else{
-            include'views/login.php';
+            include (ROOT_PATH . '/views/Login.php');
         }
       ?>
 

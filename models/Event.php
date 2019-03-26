@@ -1,9 +1,9 @@
 <?php
 
-require_once 'Model.php';
+require_once ROOT_PATH . 'Model.php';
 
 class EventModel extends Model {
-  
+
   public function addContact() {
 
     $firstName     = $_POST['firstname'];
@@ -22,7 +22,8 @@ class EventModel extends Model {
     $sql = "INSERT INTO `contact` (`firstname`, `lastname`, `email`, `home`, `work`, `cell`, `firstadress`, `secondadress`, `city`, `state`, `zip`, `country`, `userid`)
           VALUES ('$firstName', '$lastName', '$email', '$home', '$work', '$cell', '$firtAdress', '$secondAdress', '$city', '$state', '$zip', '$country', '$userid');";
 
-    Model::createConnect($sql);
+    $model = new Model;
+    $model->createConnect($sql);
   }
 
 }

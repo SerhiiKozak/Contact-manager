@@ -1,23 +1,25 @@
 <?php
-require_once 'model.php';
 
-class RegistrationModel extends Model {
-  
-    public function createUser(){
+  require_once ROOT_PATH . 'Model.php';
 
-      $firstName  = $_POST['firstname'];;
-      $lastName   = $_POST['lastname'];;
-      $login      = $_POST['login'];;
-      $email      = $_POST['email'];;
-      $password   = $_POST['password'];;
-      $cpassword  = $_POST['cpassword'];;
+  class RegistrationModel extends Model {
 
-      if($password == $cpassword){
-        $sql = "INSERT INTO `Users` (`firstname`, `lastname`, `login`, `email`, `password`)
-              VALUES ('$firstName', '$lastName', '$login', '$email', '$password' );";
-              Model::createConnect($sql);
+      public function createUser(){
+
+        $firstName  = $_POST['firstname'];;
+        $lastName   = $_POST['lastname'];;
+        $login      = $_POST['login'];;
+        $email      = $_POST['email'];;
+        $password   = $_POST['password'];;
+        $cpassword  = $_POST['cpassword'];;
+        $model      = new Model;
+
+        if($password == $cpassword){
+          $sql = "INSERT INTO `Users` (`firstname`, `lastname`, `login`, `email`, `password`)
+                VALUES ('$firstName', '$lastName', '$login', '$email', '$password' );";
+                $model->createConnect($sql);
+        }
+
       }
 
-    }
-
-}
+  }

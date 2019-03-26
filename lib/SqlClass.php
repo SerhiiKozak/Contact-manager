@@ -11,9 +11,9 @@ class SqlClass {
   private $passCode;
 
   private function __construct() {
-    $confpath=ROOT_PATH. '/lib/config.json';
-    $jsonconfig=file_get_contents($confpath);
-    $config=json_decode($jsonconfig, true);
+    $confpath = ROOT_PATH. '/lib/config.json';
+    $jsonconfig = file_get_contents($confpath);
+    $config = json_decode($jsonconfig, true);
 
     $this->databaseName = $config["dbName"];
     $this->hostName = $config["hostName"];

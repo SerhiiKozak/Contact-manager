@@ -1,13 +1,12 @@
 <?php
 
-  require_once (ROOT_PATH.'/lib/SqlClass.php');
 
   session_start();
 
-  class Controller extends SqlClass {
+  class Controller {
 
       public static function CreateView($viewName) {
-        include_once '/../views/' . $viewName . '.php';
+        include_once ROOT_PATH . '/views/' . $viewName . '.php';
       }
 
 
