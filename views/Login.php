@@ -1,5 +1,5 @@
 
-    <form  class="loginform" class="flogin" action="controllers/Login.php" method="post">
+    <form  class="loginform" class="flogin" action="login.php" method="post">
       <h3>Autorization</h3>
       <table class="logintable">
         <tr>
@@ -16,7 +16,7 @@
         </tr>
         <tr>
           <td></td>
-          <td><a href="http://contactmanager/Registration.php">Register Now!</a></td>
+          <td><a href="http://localhost/registration.php">Register Now!</a></td>
         </tr>
         <tr>
           <td></td>
