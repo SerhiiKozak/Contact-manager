@@ -12,12 +12,12 @@
         $email      = $_POST['email'];;
         $password   = $_POST['password'];;
         $cpassword  = $_POST['cpassword'];;
-        $model      = new Model;
+
 
         if($password == $cpassword){
           $sql = "INSERT INTO `Users` (`firstname`, `lastname`, `login`, `email`, `password`)
                 VALUES ('$firstName', '$lastName', '$login', '$email', '$password' );";
-                $model->createConnect($sql);
+                $this->createConnect($sql);
         }
 
       }

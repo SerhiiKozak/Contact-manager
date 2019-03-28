@@ -22,8 +22,8 @@ class EventModel extends Model {
     $sql = "INSERT INTO `contact` (`firstname`, `lastname`, `email`, `home`, `work`, `cell`, `firstadress`, `secondadress`, `city`, `state`, `zip`, `country`, `userid`)
           VALUES ('$firstName', '$lastName', '$email', '$home', '$work', '$cell', '$firtAdress', '$secondAdress', '$city', '$state', '$zip', '$country', '$userid');";
 
-    $model = new Model;
-    $model->createConnect($sql);
+
+    $this->createConnect($sql);
   }
 
 }
