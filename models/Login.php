@@ -1,6 +1,6 @@
 <?php
 
-  require_once ROOT_PATH . 'Model.php';
+  require_once ROOT_PATH . '/models/Model.php';
   require_once LIB_PATH . '/Query.php';
 
   class LoginModel extends Model {

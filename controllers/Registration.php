@@ -1,6 +1,6 @@
 <?php
 
-  require_once ROOT_PATH . 'Controller.php';
+  require_once ROOT_PATH . '/controllers/Controller.php';
   require_once ROOT_PATH . '/models/Registration.php';
 
   $regmod = new RegistrationModel;

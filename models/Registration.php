@@ -1,6 +1,6 @@
 <?php
 
-  require_once ROOT_PATH . 'Model.php';
+  require_once ROOT_PATH . '/models/Model.php';
 
   class RegistrationModel extends Model {
 

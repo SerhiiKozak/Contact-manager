@@ -1,27 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <base href="http://contactmanager/">
-  </head>
-  <body>
-    <header>
-      <table class="htable">
-        <tr>
-          <td>Contact Manager</td>
-        </tr>
-      </table>
-      <form class="authorization" action="Index.php" method="post">
-              <input class="button" type="submit" name="Authorization" value="Authorization">
-      </form>
-      <form class="home" action="Event.php" method="post">
-              <input class="button" type="submit" name="Login" value="Home">
-      </form>
-      <form class="registration" action="Registration.php" method="post">
-              <input class="button" type="submit" name="registration" value="Registration">
-      </form>
-    </header>
+
     <form  class="loginform" class="flogin" action="controllers/Login.php" method="post">
       <h3>Autorization</h3>
       <table class="logintable">
