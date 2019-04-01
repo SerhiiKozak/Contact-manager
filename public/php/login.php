@@ -17,6 +17,8 @@ if ($_POST['login']!='' && $_POST['password']!='') {
   $dbpass = $data['password'];
 
   if ($login == $dbemail && $password == $dbpass) {
+    session_start();
+    $_SESSION['userlogin']=$login;
     echo 'Login seccess!';
   } else {
     echo 'Login or password incorrect!';
