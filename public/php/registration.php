@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors','On');
 
-require_once 'Db.php';
+require_once 'lib/Db.php';
 
 $db = new Db;
 
@@ -20,7 +20,6 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
   $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 
-
   foreach ($result as $row => $data) {
     if ($data['email'] == $email) {
       $userExist = true;
@@ -30,11 +29,16 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
       $userExist = false;
     }
   }
-  if ($password == $cpassword && $userExist == false) {
-    $sql = "INSERT INTO `Users` (`firstname`, `lastname`, `email`, `password`)
+  if ($password == $cpassword) {
+      if ($userExist == false) {
+          $sql = "INSERT INTO `Users` (`first_name`, `last_name`, `email`, `password`)
            VALUES ('$firstName', '$lastName', '$email', '$password')";
-    $db->query($sql);
-    echo 'Registration success!';
+          $db->query($sql);
+          echo 'Registration success!';
+      }
+
+  } else {
+      echo 'Passwords do not match!';
   }
 } else {
   echo 'Pls fill all fields';
