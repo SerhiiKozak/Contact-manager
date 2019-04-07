@@ -5,6 +5,8 @@ ini_set('display_errors','On');
 require_once 'lib/Db.php';
 require_once  'lib/Session.php';
 
+ Session::init();
+
 if ($_POST['login']!='' && $_POST['password']!='') {
   $db = new Db;
 
@@ -20,9 +22,9 @@ if ($_POST['login']!='' && $_POST['password']!='') {
 
   if ($login == $dbemail && $password == $dbpass) {
     $session = new Session();
-    $session->set('userlogin', $login);
+    $session->set('userLogin', $login);
     $session->set('userId', $userid);
-    include_once 'viewLists.php';
+    include_once 'viewLists.phtml';
   } else {
     echo 'Login or password incorrect!';
     require_once '../login.html';

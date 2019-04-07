@@ -2,8 +2,10 @@
 
 class Session {
 
-    public function __construct() {
+
+    public static function init() {
        session_start();
+       return $session = new Session();
     }
 
     public function set($key, $value) {
@@ -13,6 +15,10 @@ class Session {
             $_SESSION[$key] = $value;
         }
 
+    }
+
+    public function getUserId() {
+        return $_SESSION['userId'];
     }
 
     public function get($key) {

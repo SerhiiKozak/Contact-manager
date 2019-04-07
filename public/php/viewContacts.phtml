@@ -1,0 +1,38 @@
+<?php
+
+require_once 'lib/Session.php';
+require_once 'lib/Contact.php';
+
+session_start();
+$cnt = new Contact();
+
+require_once '../contacts.html';
+
+$contacts = $cnt->getContacts();
+?>
+
+<table>
+    <?php foreach ($contacts as $key => $contact) :
+        if ($contact['status'] == '1') {?>
+            <tr>
+                <td> <?= $contact['first_name'];?></td>
+                <td> <?= $contact['last_name'];?></td>
+                <td> <?= $contact['email'];?></td>
+                <td> <?= $contact['home'];?></td>
+                <td> <?= $contact['work'];?></td>
+                <td> <?= $contact['cell'];?></td>
+                <td> <?= $contact['first_adress'];?></td>
+                <td> <?= $contact['second_adress'];?></td>
+                <td> <?= $contact['city'];?></td>
+                <td> <?= $contact['state'];?></td>
+                <td> <?= $contact['zip'];?></td>
+                <td> <?= $contact['country'];?></td>
+                <td> <?= $contact['birth_date'];?></td>
+                <td>
+                    <a href="editContact.php?id=<?= $contact['id']?>">Edit</a>
+                    </br>
+                    <a href="deleteContact.php?id=<?= $contact['id']?>">Delete</a>
+                </td>
+            </tr>
+        <?php } endforeach; ?>
+</table>

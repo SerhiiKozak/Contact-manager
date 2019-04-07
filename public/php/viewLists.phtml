@@ -1,0 +1,38 @@
+<?php
+
+require_once 'lib/Session.php';
+require_once 'lib/Ls.php';
+
+session_start();
+$ls = new ListContacts();
+if(isset($_SESSION['userId'])) {
+     new Exception('User do not logged!');
+}
+
+try {
+
+require_once '../lists.html';
+
+$lists = $ls->getLists();
+?>
+
+<table>
+    <?php foreach ($lists as $key => $list) :
+        if ($list['status'] == '1') {?>
+        <tr>
+            <td>
+                <a href="showContacts.php?id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
+            </td>
+            <td>
+                <a href="../editList.html?id=<?= $list['id'] ?>">Edit</a>
+                </br>
+                <a href="deleteList.php?id=<?= $list['id'] ?>">Delete</a>
+            </td>
+        </tr>
+    <?php } endforeach; ?>
+</<table>
+<?= $_SESSION['userId'];?>
+<?php } catch(Exception $e) { ?>
+    <h1>User not logged!</h1>
+<?php } ?>
+        // read about SSR, Regular, Exceptions

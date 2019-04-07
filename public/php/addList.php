@@ -3,11 +3,11 @@
 error_reporting(E_ERROR);
 ini_set('display_errors','On');
 
-require_once 'lib/Session.php';
 require_once 'lib/Ls.php';
 
-$session = new Session();
-$ls = new ls();
+session_start();
+
+$ls = new ListContacts();
 $listName = $_POST['listName'];
 if ($listName != '') {
     if ($ls->listExist($listName) == false) {
@@ -19,4 +19,4 @@ if ($listName != '') {
     echo 'Enter list name!';
 }
 
-require_once 'viewLists.php';
+require_once 'viewLists.phtml';
