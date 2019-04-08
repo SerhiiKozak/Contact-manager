@@ -5,7 +5,6 @@ ini_set('display_errors','On');
 require_once 'lib/Db.php';
 require_once  'lib/Session.php';
 
- Session::init();
 
 if ($_POST['login']!='' && $_POST['password']!='') {
   $db = new Db;

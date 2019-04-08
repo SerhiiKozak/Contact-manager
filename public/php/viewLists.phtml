@@ -1,24 +1,47 @@
 <?php
 
+try {
+
 require_once 'lib/Session.php';
 require_once 'lib/Ls.php';
 
-session_start();
+$userId = Session::get('userId');
 $ls = new ListContacts();
-if(isset($_SESSION['userId'])) {
-     new Exception('User do not logged!');
+if(isset($userId)) {
+    new Exception('User do not logged!');
 }
-
-try {
-
-require_once '../lists.html';
 
 $lists = $ls->getLists();
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lists</title>
+</head>
+<body>
+<a href="logout.php">Logout</a>
+<h2>Create new list</h2>
+<form action="addList.php" method="post">
+    <table>
+        <tr>
+            <td>List name</td>
+            <td> <input type="text" name="listName" > </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> <input name="submit" type="submit" value="Create"></td>
+        </tr>
+    </table>
+</form>
 <table>
-    <?php foreach ($lists as $key => $list) :
-        if ($list['status'] == '1') {?>
+    <tr>
+        <td>List name</td>
+        <td>Action</td>
+    </tr>
+    <?php foreach ($lists as $key => $list) :?>
+        <?php if ($list['status'] == '1') :?>
         <tr>
             <td>
                 <a href="showContacts.php?id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
@@ -29,9 +52,11 @@ $lists = $ls->getLists();
                 <a href="deleteList.php?id=<?= $list['id'] ?>">Delete</a>
             </td>
         </tr>
-    <?php } endforeach; ?>
+        <?php endif; ?>
+     <?php endforeach; ?>
 </<table>
-<?= $_SESSION['userId'];?>
-<?php } catch(Exception $e) { ?>
+
+<?= $userId;?>
+<?php } catch (Exception $e) { ?>
     <h1>User not logged!</h1>
 <?php } ?>

@@ -28,8 +28,8 @@ $contacts = $cnt->getContacts($id);
         <td>Birth Date</td>
         <td>Action</td>
     </tr>
-    <?php foreach ($contacts as $key => $contact) :
-        if ($contact['status'] == '1') {?>
+    <?php foreach ($contacts as $key => $contact) : ?>
+        <?php if ($contact['status'] == '1') : ?>
             <tr>
                 <td> <?= $contact['first_name'];?></td>
                 <td> <?= $contact['last_name'];?></td>
@@ -50,5 +50,6 @@ $contacts = $cnt->getContacts($id);
                     <a href="deleteContact.php?id=<?= $contact['id']?>">Delete</a>
                 </td>
             </tr>
-        <?php } endforeach; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
 </table>

@@ -10,4 +10,5 @@ $id = $_GET['id'];
 $status = '2';
 
 $ls->deleteList($id, $status);
+echo 'List have been deleted.';
 include_once 'viewLists.phtml';

@@ -2,13 +2,13 @@
 
 class Session {
 
+    public static $session_start = false;
 
-    public static function init() {
-       session_start();
-       return $session = new Session();
-    }
-
-    public function set($key, $value) {
+    public static function set($key, $value) {
+        if (!self::$session_start) {
+            session_start();
+            self::$session_start = session_start();
+        }
         if (isset($_SESSION[$key]) || !empty($_SESSION[$key])) {
             $_SESSION[$key] .= $value;
         } else {
@@ -17,11 +17,20 @@ class Session {
 
     }
 
-    public function getUserId() {
+    public static function getUserId() {
+        if (!self::$session_start) {
+            session_start();
+            self::$session_start = session_start();
+        }
         return $_SESSION['userId'];
     }
 
-    public function get($key) {
+    public static function get($key) {
+        if (!self::$session_start) {
+            session_start();
+            self::$session_start = session_start();
+        }
+
         if (isset($_SESSION[$key])) {
             return $_SESSION[$key];
         } else {
@@ -29,9 +38,13 @@ class Session {
         }
     }
 
-    public function destroy() {
+    public static function destroy() {
+        if (self::$session_start) {
+            session_start();
+            self::$session_start = session_start();
+        }
         session_unset();
-        $_SESSION=array();
+        $_SESSION = array();
         session_destroy();
     }
 

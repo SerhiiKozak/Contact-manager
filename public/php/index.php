@@ -5,10 +5,10 @@ ini_set('display_errors','On');
 
 require_once 'lib/Session.php';
 
-session_start();
+$userId = Session::get('userId');
 
-if ( isset($_SESSION['userId']) || !empty($_SESSION['userId'])) {
-    require_once 'viewLists.phtml';
-} else {
+if ( isset($userId) || !empty($userId)) {
     require_once '../login.html';
+} else {
+    require_once 'viewLists.phtml';
 }

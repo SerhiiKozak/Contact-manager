@@ -4,7 +4,7 @@ require_once 'Db.php';
 
 class Contact {
 
-    public $db;
+    protected $db;
     public $firstName;
     public $lastName;
     public $email;

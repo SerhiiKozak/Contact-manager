@@ -7,4 +7,5 @@ $id = $_GET['id'];
 $status = '2';
 
 $cnt->deleteContact($id, $status);
+echo 'Contact have been deleted.';
 require_once 'viewContacts.phtml';
