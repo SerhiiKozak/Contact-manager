@@ -57,8 +57,8 @@ class Contact {
         $this->db->query($sql);
     }
 
-    public function getContacts() {
-        $sql = 'SELECT id, user_id, list_id, first_name, last_name, email, home, `work`, cell, firstAdress, secondAdress, city, state, zip, country, birth_date FROM Contacts WHERE list_id='.$this->listId;
+    public function getContacts($id) {
+        $sql = 'SELECT id, user_id, list_id, first_name, last_name, email, home, `work`, cell, first_adress, second_adress, city, state, zip, country, birth_date, status FROM Contacts WHERE list_id='.$id;
         $result = $this->db->query($sql)->fetchAll();
         return $result;
     }

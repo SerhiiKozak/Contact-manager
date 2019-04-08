@@ -3,15 +3,31 @@
 require_once 'lib/Session.php';
 require_once 'lib/Contact.php';
 
-session_start();
 $cnt = new Contact();
 
 require_once '../contacts.html';
 
-$contacts = $cnt->getContacts();
+$id = $_GET['id'];
+$contacts = $cnt->getContacts($id);
 ?>
 
 <table>
+    <tr>
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>E-mail</td>
+        <td>Home</td>
+        <td>Work</td>
+        <td>Cell</td>
+        <td>1 Address</td>
+        <td>2 Address</td>
+        <td>City</td>
+        <td>State</td>
+        <td>Zip</td>
+        <td>Country</td>
+        <td>Birth Date</td>
+        <td>Action</td>
+    </tr>
     <?php foreach ($contacts as $key => $contact) :
         if ($contact['status'] == '1') {?>
             <tr>
