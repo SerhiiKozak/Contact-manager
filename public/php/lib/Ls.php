@@ -2,10 +2,10 @@
 
 require_once 'Db.php';
 
-class ListContacts {
-    public $name   = NULL;
-    public $userId = NULL;
-    public $db;
+class   ListContacts {
+    private $name   = NULL;
+    private $userId = NULL;
+    private $db;
 
     public function __construct() {
         $this->name = $_POST['listName'];

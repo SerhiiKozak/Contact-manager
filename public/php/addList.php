@@ -4,12 +4,12 @@ error_reporting(E_ERROR);
 ini_set('display_errors','On');
 
 require_once 'lib/Ls.php';
-
 session_start();
 
 $ls = new ListContacts();
+$regexsp = "/^(?!\s*$).+/";
 $listName = $_POST['listName'];
-if ($listName != '') {
+if (preg_match($regexsp, $listName)) {
     if ($ls->listExist($listName) == false) {
         $ls->createList();
     } else {

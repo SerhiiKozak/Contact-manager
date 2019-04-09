@@ -8,7 +8,7 @@ require_once  'lib/Session.php';
 
 Session::set('listId', '');
 Session::set('listId', $_GET['id']);
-$listId =$_SESSION['listId'];
+$listId = $_SESSION['listId'];
 $name = $_POST['newListName'];
 $ls = new ListContacts();
 echo $_SESSION['listId'];

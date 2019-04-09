@@ -4,22 +4,22 @@ require_once 'Db.php';
 
 class Contact {
 
-    protected $db;
-    public $firstName;
-    public $lastName;
-    public $email;
-    public $home;
-    public $work;
-    public $cell;
-    public $firstAdress;
-    public $secondAdress;
-    public $city;
-    public $state;
-    public $zip;
-    public $country;
-    public $birthday;
-    public $userId;
-    public $listId;
+    private $db;
+    private $firstName;
+    private $lastName;
+    private $email;
+    private $home;
+    private $work;
+    private $cell;
+    private $firstAdress;
+    private $secondAdress;
+    private $city;
+    private $state;
+    private $zip;
+    private $country;
+    private $birthday;
+    private $userId;
+    private $listId;
 
 
     public function __construct() {
