@@ -64,7 +64,7 @@ try{
 
     $id = $_GET['id'];
 
-    foreach ($fields as $field => $flag) {
+    foreach ($fields as $field => &$flag) {
         if (isset($_POST[$field])) {
             if (preg_match(flag['rule'], $_POST[$field])) {
                 $flag['value'] = $_POST['$field'];
