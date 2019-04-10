@@ -3,7 +3,7 @@
 error_reporting(E_ERROR);
 ini_set('display_errors','On');
 
-require_once  'lib/Ls.php';
+require_once 'lib/ListContacts.php';
 require_once  'lib/Session.php';
 
 $listId = $_GET['id'];

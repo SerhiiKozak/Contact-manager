@@ -3,7 +3,7 @@
 error_reporting(E_ERROR);
 ini_set('display_errors','On');
 
-require_once 'lib/Ls.php';
+require_once 'lib/ListContacts.php';
 session_start();
 
 $ls = new ListContacts();
