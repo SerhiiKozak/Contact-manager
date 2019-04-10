@@ -8,7 +8,7 @@ session_start();
 
 $ls = new ListContacts();
 $listName = trim($_POST['listName']);
-if ($listName != '') {
+if (!empty($listName)) {
     if ($ls->listExist($listName) == false) {
         $ls->createList();
     } else {
