@@ -6,9 +6,7 @@ ini_set('display_errors','On');
 require_once  'lib/Ls.php';
 require_once  'lib/Session.php';
 
-Session::set('listId', '');
-Session::set('listId', $_GET['id']);
-$listId = $_SESSION['listId'];
+$listId = $_GET['id'];
 $name = $_POST['newListName'];
 $ls = new ListContacts();
 echo $_SESSION['listId'];

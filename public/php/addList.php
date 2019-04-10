@@ -7,9 +7,8 @@ require_once 'lib/Ls.php';
 session_start();
 
 $ls = new ListContacts();
-$regexsp = "/^(?!\s*$).+/";
-$listName = $_POST['listName'];
-if (preg_match($regexsp, $listName)) {
+$listName = trim($_POST['listName']);
+if ($listName != '') {
     if ($ls->listExist($listName) == false) {
         $ls->createList();
     } else {
