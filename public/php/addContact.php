@@ -7,5 +7,10 @@ session_start();
 require_once 'lib/Contact.php';
 
 $contact = new Contact();
-
 $contact->createContact();
+foreach ($contact->fields as $key=>$value) {
+
+    echo $value['value'];
+}
+
+//$contact->createContact();

@@ -1,0 +1,123 @@
+<?php error_reporting(E_ERROR);
+ini_set('display_errors','On');?>
+<?php   $fields = [
+        'user_id' => [
+            'value' => $_SESSION['userId'],
+            'name' => '  ',
+            'type' => 'hidden'
+        ],
+        'list_id' => [
+            'value' => $_SESSION['listId'],
+            'name' => '  ',
+            'type' => 'hidden'
+        ],
+        'first_name' => [
+            'value' => '',
+            'name' => 'First Name',
+            'type' => 'text'
+        ],
+        'last_name' => [
+            'value' => '',
+            'name' => 'Second Name',
+            'type' => 'text'
+        ],
+        'email' => [
+            'value' => '',
+            'name' => 'E-mail',
+            'type' => 'text'
+        ],
+        'home' => [
+            'value' => '',
+            'name' => 'Home',
+            'type' => 'text'
+        ],
+        'work' => [
+            'value' => '',
+            'name' => 'Work',
+            'type' => 'text'
+        ],
+        'cell' => [
+            'value' => '',
+            'name' => 'Cell',
+            'type' => 'text'
+        ],
+        'first_adress' => [
+            'value' => '',
+            'name' => 'First Address',
+            'type' => 'text'
+        ],
+        'second_adress' => [
+            'value' => '',
+            'name' => 'Second Address',
+            'type' => 'text'
+        ],
+        'city' => [
+            'value' => '',
+            'name' => 'City',
+            'type' => 'text'
+        ],
+        'state' => [
+            'value' => '',
+            'name' => 'State',
+            'type' => 'text'
+        ],
+        'zip' => [
+            'value' => '',
+            'name' => 'Zip',
+            'type' => 'text'
+        ],
+        'country' => [
+            'value' => '',
+            'name' => 'Country',
+            'type' => 'text'
+        ],
+        'birth_date' => [
+            'value' => '',
+            'name' => 'Birth date',
+            'type' => 'date'
+        ]
+    ]; ?>
+<?php $id = $_GET['contact_id'];?>
+<?php if (!empty($id)) {
+        require_once 'lib/Contact.php';
+        $contact = new Contact();
+        $result = $contact->getContact ($id);
+        foreach ($result[0] as $key => $value) {
+            $fields[$key]['value'] = $value;
+        }
+      }?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Add contact</title>
+</head>
+<body>
+<?php if ($_GET['action'] == 'add') : ?>
+<form action="addContact.php" method="post">
+<?php elseif ($_GET['action'] == 'edit') : ?>
+<form action="editContact.php?id=   <?= $id?>" method="post">
+<?php endif; ?>
+    <table>
+        <?php foreach($fields as $key => $value) : ?>
+            <tr>
+                <td><?= $value['name']; ?></td>
+                <td> <input type="<?= $value['type']?>" name="<?= $key?>" value="<?= $value['value']?>"></td>
+            </tr>
+        <?php endforeach;?>
+        <tr>
+            <td></td>
+            <?php if ($_GET['action'] == 'add') : ?>
+            <td> <input type="submit" value="Create"></td>
+            <?php elseif ($_GET['action'] == 'edit') : ?>
+            <td> <input type="submit" value="Edit"></td>
+            <?php endif; ?>
+            <td> <a href="index.php">Cancel</a> </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
+
+

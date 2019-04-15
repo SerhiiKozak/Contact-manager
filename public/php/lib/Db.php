@@ -1,6 +1,6 @@
 <?php
-
-define('ROOT_PARH',dirname(__DIR__));
+//
+define('ROOT_PATH',dirname(__DIR__));
 
 class Db {
 
@@ -16,7 +16,10 @@ class Db {
     $this->pass     = '';
   }
 
-  public function CreateDb() {
+    /**
+     * Create database connection.
+     **/
+  public function createDb() {
     try {
       $con = new PDO('mysql:host=' . $this->hostName . '; dbname=' . $this->dbName, $this->userName, $this->pass);
       $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -26,8 +29,11 @@ class Db {
     return $con;
   }
 
+    /**
+     * Send query to database.
+     **/
   public function query($sql) {
-    $con = $this->CreateDb();
+    $con = $this->createDb();
     $valuesArray = array('login'=>$_POST['login']);
     $stmt = $con->prepare($sql);
     $stmt->execute($valuesArray);
