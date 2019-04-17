@@ -3,5 +3,9 @@
 require_once 'lib/Session.php';
 
 Session::destroy();
+$data = Session::get('CONTACT_USER');
+if(empty(Session::get('CONTACT_USER'))) {
+  header('Location: index.php');
+}
 
-require_once '../index.html';
+print_r($data);

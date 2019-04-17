@@ -1,89 +1,16 @@
 <?php error_reporting(E_ERROR);
 ini_set('display_errors','On');?>
-<?php   $fields = [
-        'user_id' => [
-            'value' => $_SESSION['userId'],
-            'name' => '  ',
-            'type' => 'hidden'
-        ],
-        'list_id' => [
-            'value' => $_SESSION['listId'],
-            'name' => '  ',
-            'type' => 'hidden'
-        ],
-        'first_name' => [
-            'value' => '',
-            'name' => 'First Name',
-            'type' => 'text'
-        ],
-        'last_name' => [
-            'value' => '',
-            'name' => 'Second Name',
-            'type' => 'text'
-        ],
-        'email' => [
-            'value' => '',
-            'name' => 'E-mail',
-            'type' => 'text'
-        ],
-        'home' => [
-            'value' => '',
-            'name' => 'Home',
-            'type' => 'text'
-        ],
-        'work' => [
-            'value' => '',
-            'name' => 'Work',
-            'type' => 'text'
-        ],
-        'cell' => [
-            'value' => '',
-            'name' => 'Cell',
-            'type' => 'text'
-        ],
-        'first_adress' => [
-            'value' => '',
-            'name' => 'First Address',
-            'type' => 'text'
-        ],
-        'second_adress' => [
-            'value' => '',
-            'name' => 'Second Address',
-            'type' => 'text'
-        ],
-        'city' => [
-            'value' => '',
-            'name' => 'City',
-            'type' => 'text'
-        ],
-        'state' => [
-            'value' => '',
-            'name' => 'State',
-            'type' => 'text'
-        ],
-        'zip' => [
-            'value' => '',
-            'name' => 'Zip',
-            'type' => 'text'
-        ],
-        'country' => [
-            'value' => '',
-            'name' => 'Country',
-            'type' => 'text'
-        ],
-        'birth_date' => [
-            'value' => '',
-            'name' => 'Birth date',
-            'type' => 'date'
-        ]
-    ]; ?>
+<?php   require_once 'lib/Contact.php';
+        $contact= new Contact();
+        $fields = $contact->getFields(); ?>
+
 <?php $id = $_GET['contact_id'];?>
 <?php if (!empty($id)) {
         require_once 'lib/Contact.php';
         $contact = new Contact();
         $result = $contact->getContact ($id);
-        foreach ($result[0] as $key => $value) {
-            $fields[$key]['value'] = $value;
+        foreach ($fields as $key => $value) {
+            $fields[$key]['value'] = $result[0][$key];
         }
       }?>
 

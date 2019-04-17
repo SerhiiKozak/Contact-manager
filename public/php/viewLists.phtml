@@ -5,13 +5,14 @@ try {
 require_once 'lib/Session.php';
 require_once 'lib/ListContacts.php';
 
-$userId = Session::get('userId');
+$userData = Session::get('CONTACT_USER');
 $ls = new ListContacts();
-if(isset($userId)) {
+
+if(empty($_SESSION['CONTACT_USER'])) {
     new Exception('User do not logged!');
 }
 
-$lists = $ls->getLists();
+$lists = $ls->getLists($userData['id']);
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +57,6 @@ $lists = $ls->getLists();
      <?php endforeach; ?>
 </<table>
 
-<?= $userId;?>
 <?php } catch (Exception $e) { ?>
-    <h1>User not logged!</h1>
+    <h1> <?= $e->getMessage()?></h1>
 <?php } ?>

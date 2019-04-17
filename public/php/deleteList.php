@@ -4,11 +4,18 @@
 error_reporting(E_ERROR);
 ini_set('display_errors','On');
 
-require_once 'lib/ListContacts.php';
+try {
+  if(empty($_SESSION['CONTACT_USER'])) {
+    new Exception('User do not logged!');
+  }
+  require_once 'lib/ListContacts.php';
 
-$ls = new ListContacts();
-$id = $_GET['id'];
+  $ls = new ListContacts();
+  $id = $_GET['id'];
 
-$ls->deleteList($id);
-echo 'List have been deleted.';
-include_once 'viewLists.phtml';
+  $ls->deleteList($id);
+  echo 'List have been deleted.';
+  include_once 'viewLists.phtml';
+} catch(Exception $e) {
+  header('Location: index.php');
+}

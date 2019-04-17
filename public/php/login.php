@@ -12,18 +12,21 @@ if ($_POST['login']!='' && $_POST['password']!='') {
   $login = $_POST['login'];
   $password = $_POST['password'];
 
-  $sql = 'SELECT id, email, password FROM Users WHERE email = :login';
+  $sql = 'SELECT id, first_name, last_name, email, password FROM Users WHERE email = '.$db->quote($login);
   $result = $db-> query($sql)->fetchAll(PDO::FETCH_ASSOC);
   $data = $result[0];
-  $dbemail = $data['email'];
-  $dbpass = $data['password'];
-  $userid = $data['id'];
+  $dbEmail = $data['email'];
+  $dbPass = $data['password'];
+  $dbFirstName = $data['first_name'];
+  $dbLastName = $data['last_name'];
+  $userId = $data['id'];
+  $userData = array('id' => $userId, 'fName' => $dbFirstName, 'lName' => $dbLastName, 'email' => $dbEmail);
 
-  if ($login == $dbemail && $password == $dbpass) {
+  if ($login == $dbEmail && $password == $dbPass) {
     $session = new Session();
-    $session->set('userLogin', $login);
-    $session->set('userId', $userid);
-    include_once 'viewLists.phtml';
+    $session->set('CONTACT_USER', $userData);
+    header('Location: index.php');
+    //include_once 'viewLists.phtml';
   } else {
     echo 'Login or password incorrect!';
     require_once '../login.html';

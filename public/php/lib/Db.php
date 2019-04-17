@@ -8,36 +8,36 @@ class Db {
   private $dbName;
   private $userName;
   private $pass;
+  protected $con;
 
   public function __construct() {
     $this->hostName = 'localhost';
     $this->dbName   = 'ContactsManager';
     $this->userName = 'root';
     $this->pass     = '';
+    $this->con      = $this->createConnect();
   }
 
     /**
      * Create database connection.
      **/
-  public function createDb() {
-    try {
+  private function createConnect() {
       $con = new PDO('mysql:host=' . $this->hostName . '; dbname=' . $this->dbName, $this->userName, $this->pass);
       $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (PDOException $e) {
-      echo 'Connection failed' . $e->getMessage();
-    }
-    return $con;
+      return $con;
   }
 
     /**
      * Send query to database.
      **/
   public function query($sql) {
-    $con = $this->createDb();
-    $valuesArray = array('login'=>$_POST['login']);
-    $stmt = $con->prepare($sql);
-    $stmt->execute($valuesArray);
+    $stmt = $this->con->prepare($sql);
+    $stmt->execute();
     return $stmt;
+  }
+
+  public function  quote($value) {
+    return $this->con->quote($value);
   }
 
 }

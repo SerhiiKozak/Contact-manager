@@ -2,18 +2,17 @@
 // automate all functions use foreach!
 require_once 'Db.php';
 
-class Contact {
+class Contact extends Db {
 
-    private $db;
     public $fields = [
         'user_id' => [
             'value' => '',
-            'name' => 'First Name',
+            'name' => '  ',
             'type' => 'hidden'
         ],
         'list_id' => [
             'value' => '',
-            'name' => 'First Name',
+            'name' => '   ',
             'type' => 'hidden'
         ],
         'first_name' => [
@@ -27,14 +26,14 @@ class Contact {
             'rule' => '/^[a-zA-Z]+/',
             'value' => '',
             'message' => 'Last name field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Second Name',
             'type' => 'text'
         ],
         'email' => [
             'rule' => '/^[a-zA-z0-9_-]+@[a-zA-Z]+\.[a-zA-z]{2,}$/',
             'value' => '',
             'message' => 'E-mail field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'E-mail',
             'type' => 'text',
             'type' => 'text'
         ],
@@ -42,77 +41,74 @@ class Contact {
             'rule' => '/^[0-9]{6}/',
             'value' => '',
             'message' => 'Home field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Home',
             'type' => 'text'
         ],
         'work' => [
             'rule' => '/^[0-9]{6}/',
             'value' => '',
             'message' => 'Work field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Work',
             'type' => 'text'
         ],
         'cell' => [
             'rule' => '/\(?[0-9]{3}\)?([ -]?)([0-9]{3})\2([0-9]{4})/',
             'value' => '',
             'message' => 'Cell field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Cell',
             'type' => 'text'
         ],
         'first_adress' => [
             'rule' => '/^[a-zA-Z]+/',
             'value' => '',
             'message' => 'First Address field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'First Address',
             'type' => 'text'
         ],
         'second_adress' => [
             'rule' => '/^[a-zA-Z]+/',
             'value' => '',
             'message' => 'Second Address field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Second Address',
             'type' => 'text'
         ],
         'city' => [
             'rule' => '/^[a-zA-Z]+/',
             'value' => '',
             'message' => 'City field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'City',
             'type' => 'text'
         ],
         'state' => [
             'rule' => '/^[a-zA-Z]+/',
             'value' => '',
             'message' => 'State field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'State',
             'type' => 'text'
         ],
         'zip' => [
             'rule' => '/^[0-9]{5}/',
             'value' => '',
             'message' => 'Zip field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Zip',
             'type' => 'text'
         ],
         'country' => [
             'rule' => '/^[a-zA-Z]+/',
             'value' => '',
             'message' => 'Country field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Country',
             'type' => 'text'
         ],
         'birth_date' => [
             'rule' => '/^[0-9]{2}\.[0-2]{2}\.[0-9]{4}/',
             'value' => '',
             'message' => 'Birth date field empty or incorrect',
-            'name' => 'First Name',
+            'name' => 'Birth Date',
             'type' => 'date'
         ]
     ];
 
-    public function __construct() {
-        $this->db = new Db();
-    }
 
     /**
      * Fill $fields array from input form.
@@ -135,10 +131,10 @@ class Contact {
         $this->_set();
         $sql = 'INSERT INTO `Contacts` SET ';
         foreach ($this->fields as $key=>$value) {
-            $sql .= '`' . $key. '`='. $this->db->createDb()->quote($value['value']). ',';
+            $sql .= '`' . $key. '`='. $this->con->quote($value['value']). ',';
         }
         $sql = rtrim($sql,',');
-        $this->db->query($sql);
+        $this->query($sql);
     }
 
     /**
@@ -146,8 +142,8 @@ class Contact {
      * Changes status of the contact to 0.
      **/
     public function deleteContact($id) {
-        $sql = 'UPDATE `Contacts` SET status=0 WHERE id='. $this->db->createDb()->quote($id);
-        $this->db->query($sql);
+        $sql = 'UPDATE `Contacts` SET status=0 WHERE id='. $this->con->quote($id);
+        $this->query($sql);
     }
 
     /**
@@ -158,11 +154,11 @@ class Contact {
         $this->_set();
         $sql = 'UPDATE `Contacts` SET ';
         foreach ($this->fields as $key=>$value) {
-            $sql .= '`' . $key . '`=' . $this->db->createDb()->quote($value['value']). ',';
+            $sql .= '`' . $key . '`=' . $this->con->quote($value['value']). ',';
         }
         $sql = rtrim($sql, ',');
         $sql .=' WHERE id='.$id;
-        $this->db->query($sql);
+        $this->query($sql);
     }
 
     /**
@@ -171,8 +167,8 @@ class Contact {
      * Return array of contacts.
      **/
     public function getContacts($id) {
-        $sql = 'SELECT id, user_id, list_id, first_name, last_name, email, home, `work`, cell, first_adress, second_adress, city, state, zip, country, birth_date, status FROM Contacts WHERE list_id='.$id;
-        $result = $this->db->query($sql)->fetchAll();
+        $sql = 'SELECT * FROM Contacts WHERE list_id='.$id;
+        $result = $this->query($sql)->fetchAll();
         return $result;
     }
 
@@ -182,8 +178,12 @@ class Contact {
      * Return array of contact parameters.
      **/
     public function getContact($id) {
-        $sql = 'SELECT user_id, list_id, first_name, last_name, email, home, `work`, cell, first_adress, second_adress, city, state, zip, country, birth_date FROM Contacts WHERE id='.$id;
-        $result = $this->db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $sql = 'SELECT * FROM Contacts WHERE id='.$id;
+        $result = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function getFields() {
+      return $this->fields;
     }
 }

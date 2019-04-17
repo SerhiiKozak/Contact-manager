@@ -1,62 +1,69 @@
 <?php
-// change href edit call viewContact(where will be  Edit form witch start editContact)
-require_once 'lib/Session.php';
-require_once 'lib/Contact.php';
+try {
+    require_once 'lib/Session.php';
+    require_once 'lib/Contact.php';
 
-$cnt = new Contact();
+    $cnt = new Contact();
 
-$id = $_GET['id'];
-$contacts = $cnt->getContacts($id);
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Contacts</title>
-</head>
-<body>
-    <a href="showContact.php?action=add&id=<?= $id ?>" type=>Add</a>
-    <table>
-        <tr>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>E-mail</td>
-            <td>Home</td>
-            <td>Work</td>
-            <td>Cell</td>
-            <td>1 Address</td>
-            <td>2 Address</td>
-            <td>City</td>
-            <td>State</td>
-            <td>Zip</td>
-            <td>Country</td>
-            <td>Birth Date</td>
-            <td>Action</td>
-        </tr>
-        <?php foreach ($contacts as $key => $contact) : ?>
-            <?php if ($contact['status'] == '1') : ?>
-                <tr>
-                    <td> <?= $contact['first_name'];?></td>
-                    <td> <?= $contact['last_name'];?></td>
-                    <td> <?= $contact['email'];?></td>
-                    <td> <?= $contact['home'];?></td>
-                    <td> <?= $contact['work'];?></td>
-                    <td> <?= $contact['cell'];?></td>
-                    <td> <?= $contact['first_adress'];?></td>
-                    <td> <?= $contact['second_adress'];?></td>
-                    <td> <?= $contact['city'];?></td>
-                    <td> <?= $contact['state'];?></td>
-                    <td> <?= $contact['zip'];?></td>
-                    <td> <?= $contact['country'];?></td>
-                    <td> <?= $contact['birth_date'];?></td>
-                    <td>
-                        <a href="showContact.php?action=edit&contact_id=<?= $contact['id']?>">Edit</a>
-                        </br>
-                        <a href="deleteContact.php?id=<?= $contact['id']?>">Delete</a>
-                    </td>
-                </tr>
-            <?php endif; ?>
-        <?php endforeach; ?>
-    </table>
-</body>
-</html>
+    $id = $_GET['id'];
+    $contacts = $cnt->getContacts($id);
+
+    if (empty($_SESSION['CONTACT_USER'])) {
+      new Exception('User do not logged!');
+    }
+    ?>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Contacts</title>
+    </head>
+    <body>
+        <a href="showContact.php?action=add&id=<?= $id ?>" type=>Add</a>
+        <table>
+            <tr>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>E-mail</td>
+                <td>Home</td>
+                <td>Work</td>
+                <td>Cell</td>
+                <td>1 Address</td>
+                <td>2 Address</td>
+                <td>City</td>
+                <td>State</td>
+                <td>Zip</td>
+                <td>Country</td>
+                <td>Birth Date</td>
+                <td>Action</td>
+            </tr>
+            <?php foreach ($contacts as $key => $contact) : ?>
+                <?php if ($contact['status'] == '1') : ?>
+                    <tr>
+                        <td> <?= $contact['first_name'];?></td>
+                        <td> <?= $contact['last_name'];?></td>
+                        <td> <?= $contact['email'];?></td>
+                        <td> <?= $contact['home'];?></td>
+                        <td> <?= $contact['work'];?></td>
+                        <td> <?= $contact['cell'];?></td>
+                        <td> <?= $contact['first_adress'];?></td>
+                        <td> <?= $contact['second_adress'];?></td>
+                        <td> <?= $contact['city'];?></td>
+                        <td> <?= $contact['state'];?></td>
+                        <td> <?= $contact['zip'];?></td>
+                        <td> <?= $contact['country'];?></td>
+                        <td> <?= $contact['birth_date'];?></td>
+                        <td>
+                            <a href="showContact.php?action=edit&contact_id=<?= $contact['id']?>">Edit</a>
+                            </br>
+                            <a href="deleteContact.php?id=<?= $contact['id']?>">Delete</a>
+                        </td>
+                    </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+    </body>
+    </html>
+<?php } catch(Exception $e) {
+    header('Location: index.php');
+}?>

@@ -2,15 +2,15 @@
 
 require_once 'Db.php';
 
-class   ListContacts {
+class   ListContacts extends Db {
     private $name   = NULL;
     private $userId = NULL;
-    private $db;
 
     public function __construct() {
+      parent::__construct();
+
         $this->name = $_POST['listName'];
-        $this->userId = $_SESSION['userId'];
-        $this->db = new Db();
+        $this->userId = $_SESSION['CONTACT_USER']['id'];
     }
 
     /**
@@ -18,16 +18,16 @@ class   ListContacts {
      **/
     public function createList() {
         $sql = "INSERT INTO `Contacts_list` (`list_name`, `user_id`) VALUES ('$this->name', '$this->userId')";
-        $this->db->query($sql);
+        $this->query($sql);
     }
 
     /**
      * @return array $result
      * Get array of list objects.
      **/
-    public function getLists() {
-        $sql = 'SELECT id, user_id, list_name, status FROM Contacts_list WHERE user_id =' . $this->userId;
-        $result = $this->db->query($sql)->fetchAll();
+    public function getLists($id) {
+        $sql = 'SELECT id, user_id, list_name, status FROM Contacts_list WHERE user_id =' . $id;
+        $result = $this->query($sql)->fetchAll();
         return $result;
     }
 
@@ -37,8 +37,8 @@ class   ListContacts {
      * Changes the current list name to the specified one.
      **/
     public function editList($id, $name) {
-        $sql = 'UPDATE Contacts_list SET list_name='.$this->db->createDb()->quote($name).' WHERE id='.$id;
-        $this->db->query($sql);
+        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name).' WHERE id='.$id;
+        $this->query($sql);
     }
 
     /**
@@ -47,7 +47,8 @@ class   ListContacts {
      **/
     public function deleteList($id) {
         $sql = 'UPDATE Contacts_list SET status=0 WHERE id='.$id;
-        $this->db->query($sql);
+        $this->query($sql);
+        // TODO add delete function contact which exist in list
     }
 
     /**
@@ -57,7 +58,7 @@ class   ListContacts {
      **/
     public function listExist($name) {
 
-        $lists = $this->getLists();
+        $lists = $this->getLists($this->userId);
         foreach ($lists as $key => $data) {
             if ($data['list_name'] == $name) {
                 return true;
