@@ -4,22 +4,24 @@ error_reporting(E_ERROR);
 ini_set('display_errors','On');
 
 try {
-  if(empty($_SESSION['CONTACT_USER'])) {
+  require_once 'lib/Session.php';
+
+  if(empty(Session::get('CONTACT_USER'))) {
     new Exception('User do not logged!');
   }
+
   require_once 'lib/ListContacts.php';
-  session_start();
 
   $ls = new ListContacts();
   $listName = trim($_POST['listName']);
   if (!empty($listName)) {
-      if ($ls->listExist($listName) == false) {
-          $ls->createList();
-      } else {
-          echo 'List with this name already exist!';
-      }
+    if ($ls->listExist($listName) == false) {
+      $ls->createList();
+    } else {
+      echo 'List with this name already exist!';
+    }
   } else {
-      echo 'Enter list name!';
+    echo 'Enter list name!';
   }
 
   require_once 'viewLists.phtml';

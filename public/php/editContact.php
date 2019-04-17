@@ -3,7 +3,9 @@
 error_reporting(E_ERROR);
 ini_set('display_errors','On');
 try {
-  if(empty($_SESSION['CONTACT_USER'])) {
+  require_once 'lib/Session.php';
+
+  if(empty(Session::get('CONTACT_USER'))) {
     new Exception('User do not logged!');
   }
   try{
@@ -20,6 +22,3 @@ try {
 } catch(Exception $e) {
   header('Location: index.php');
 }
-
-
-

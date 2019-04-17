@@ -12,7 +12,7 @@ if ($_POST['login']!='' && $_POST['password']!='') {
   $login = $_POST['login'];
   $password = $_POST['password'];
 
-  $sql = 'SELECT id, first_name, last_name, email, password FROM Users WHERE email = '.$db->quote($login);
+  $sql = 'SELECT * FROM Users WHERE email = '.$db->quote($login);
   $result = $db-> query($sql)->fetchAll(PDO::FETCH_ASSOC);
   $data = $result[0];
   $dbEmail = $data['email'];

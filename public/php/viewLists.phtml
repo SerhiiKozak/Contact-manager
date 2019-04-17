@@ -8,7 +8,7 @@ require_once 'lib/ListContacts.php';
 $userData = Session::get('CONTACT_USER');
 $ls = new ListContacts();
 
-if(empty($_SESSION['CONTACT_USER'])) {
+if(empty(Session::get('CONTACT_USER'))) {
     new Exception('User do not logged!');
 }
 

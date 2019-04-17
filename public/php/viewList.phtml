@@ -1,6 +1,8 @@
 <?php require_once 'lib/Db.php';?>
 <?php try {
-   if (empty($_SESSION['CONTACT_USER'])) {
+    require_once 'lib/Session.php';
+
+   if (empty(Session::get('CONTACT_USER'))) {
     new Exception('User do not logged!');
   }?>
     <!DOCTYPE html>

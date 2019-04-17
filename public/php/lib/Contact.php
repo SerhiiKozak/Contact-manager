@@ -7,12 +7,12 @@ class Contact extends Db {
     public $fields = [
         'user_id' => [
             'value' => '',
-            'name' => '  ',
+            'name' => '',
             'type' => 'hidden'
         ],
         'list_id' => [
             'value' => '',
-            'name' => '   ',
+            'name' => '',
             'type' => 'hidden'
         ],
         'first_name' => [
