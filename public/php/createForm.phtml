@@ -1,18 +1,22 @@
-<?php error_reporting(E_ERROR);
-ini_set('display_errors','On');?>
-<?php   require_once 'lib/Contact.php';
-        $contact= new Contact();
-        $fields = $contact->getFields(); ?>
+<?php
 
-<?php $id = $_GET['contact_id'];?>
-<?php if (!empty($id)) {
-        require_once 'lib/Contact.php';
-        $contact = new Contact();
-        $result = $contact->getContact ($id);
-        foreach ($fields as $key => $value) {
-            $fields[$key]['value'] = $result[0][$key];
-        }
-      }?>
+require_once 'lib/Contact.php';
+require_once 'lib/Session.php';
+
+$contact = new Contact();
+$fields = $contact->getFields();
+$user = Session::get('CONTACT_USER');
+$id = $_GET['contact_id'];
+
+if (!empty($id)) {
+    $result = $contact->getContact ($id);
+    foreach ($fields as $key => $value) {
+        $fields[$key]['value'] = $result[0][$key];
+    }
+} else {
+  $fields['user_id']['value'] = $user['id'];
+  $fields['list_id']['value'] = $_GET['id'];
+}?>
 
 <!DOCTYPE html>
 <html>
@@ -22,9 +26,9 @@ ini_set('display_errors','On');?>
 </head>
 <body>
 <?php if ($_GET['action'] == 'add') : ?>
-<form action="addContact.php" method="post">
+<form action="addContact.php?id=<?= $_GET['id']?>" method="post">
 <?php elseif ($_GET['action'] == 'edit') : ?>
-<form action="editContact.php?id=   <?= $id?>" method="post">
+<form action="editContact.php?id=<?= $id?>" method="post">
 <?php endif; ?>
     <table>
         <?php foreach($fields as $key => $value) : ?>
@@ -40,7 +44,7 @@ ini_set('display_errors','On');?>
             <?php elseif ($_GET['action'] == 'edit') : ?>
             <td> <input type="submit" value="Edit"></td>
             <?php endif; ?>
-            <td> <a href="index.php">Cancel</a> </td>
+            <td> <a href="showContacts.php?id=<?= $_GET['id'];?>">Cancel</a> </td>
         </tr>
     </table>
 </form>

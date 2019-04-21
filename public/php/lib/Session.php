@@ -19,19 +19,6 @@ class Session {
         } else {
             $_SESSION[$key] = $value;
         }
-
-    }
-
-    /**
-     * @return int $_SESSION['userId']
-     * Return user id.
-     **/
-    public static function getUserId() {
-        if (!self::$session_start) {
-            session_start();
-            self::$session_start = session_start();
-        }
-        return $_SESSION['userId'];
     }
 
     /**
@@ -64,5 +51,4 @@ class Session {
         $_SESSION = array();
         session_destroy();
     }
-
 }

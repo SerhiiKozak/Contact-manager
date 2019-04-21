@@ -1,7 +1,5 @@
 <?php
 
-try {
-
 require_once 'lib/Session.php';
 require_once 'lib/ListContacts.php';
 
@@ -9,7 +7,7 @@ $userData = Session::get('CONTACT_USER');
 $ls = new ListContacts();
 
 if(empty(Session::get('CONTACT_USER'))) {
-    new Exception('User do not logged!');
+  header('Location: index.php');
 }
 
 $lists = $ls->getLists($userData['id']);
@@ -57,6 +55,3 @@ $lists = $ls->getLists($userData['id']);
      <?php endforeach; ?>
 </<table>
 
-<?php } catch (Exception $e) { ?>
-    <h1> <?= $e->getMessage()?></h1>
-<?php } ?>

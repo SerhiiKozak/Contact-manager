@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('display_errors','On');
-
 require_once 'lib/Db.php';
 require_once 'lib/Session.php';
 
