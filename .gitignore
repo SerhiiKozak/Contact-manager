@@ -1,3 +1,4 @@
 public/db/*
 public/Dockerfile
 public/docker-compose.yaml
+.idea/
