@@ -6,6 +6,8 @@ class   ListContacts extends Db {
 
     private $name   = NULL;
     private $userId = NULL;
+    private $createAt = NULL;
+    private $editAt = NULL;
 
     public function __construct() {
       parent::__construct();
@@ -18,7 +20,8 @@ class   ListContacts extends Db {
      * Crete list and send data to database
      **/
     public function createList() {
-        $sql = "INSERT INTO `Contacts_list` (`list_name`, `user_id`) VALUES ('$this->name', '$this->userId')";
+        $this->createAt = time();
+        $sql = "INSERT INTO `Contacts_list` (`list_name`, `user_id`, `create_at`) VALUES ('$this->name', '$this->userId', '$this->createAt')";
         $this->query($sql);
     }
 
@@ -38,7 +41,8 @@ class   ListContacts extends Db {
      * Changes the current list name to the specified one.
      **/
     public function editList($id, $name) {
-        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name).' WHERE id='.$id;
+        $this->editAt = time();
+        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name). ', edit_at='.$this->editAt.' WHERE id='.$id;
         $this->query($sql);
     }
 
@@ -47,7 +51,8 @@ class   ListContacts extends Db {
      * Changes list status to 0.
      **/
     public function deleteList($id) {
-        $sql = 'UPDATE Contacts_list SET status=0 WHERE id='.$id;
+        $this->editAt = time();
+        $sql = 'UPDATE Contacts_list SET status=0, edit_at='.$this->editAt.' WHERE id='.$id;
         $this->query($sql);
     }
 

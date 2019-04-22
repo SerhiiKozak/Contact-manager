@@ -106,7 +106,15 @@ class Contact extends Db {
             'message' => 'Birth date field empty or incorrect',
             'name' => 'Birth Date',
             'type' => 'date'
-        ]
+        ],
+        'create_at' => [
+            'value' =>'',
+            'type' => 'hidden'
+        ],
+      'create_at' => [
+        'value' =>'',
+        'type' => 'hidden'
+      ]
     ];
 
     /**
@@ -141,6 +149,7 @@ class Contact extends Db {
      * Changes status of the contact to 0.
      **/
     public function deleteContact($id) {
+
         $sql = 'UPDATE `Contacts` SET status=0 WHERE id='. $this->con->quote($id);
         $this->query($sql);
     }

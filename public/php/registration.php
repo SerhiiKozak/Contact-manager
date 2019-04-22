@@ -38,7 +38,6 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
       $userId = $data['id'];
       $userData = array('id' => $userId, 'fName' => $firstName, 'lName' => $lastName, 'email' => $email);
       $session->set('CONTACT_USER', $userData);
-      echo 'Registration success!';
       header('Location: index.php');
       }
 

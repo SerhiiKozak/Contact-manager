@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `ContactsManager`.`Contacts_list` (
   `list_name` VARCHAR(45) NULL,
   `create_at` DATETIME NULL,
   `edit_at` DATETIME NULL,
-  `status` TINYINT(1) NULL,
+  `status` TINYINT(1) NULL DEFAULT 1,
   PRIMARY KEY (`id`, `user_id`))
 ENGINE = InnoDB;
 
