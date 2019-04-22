@@ -1,25 +1,24 @@
-<?php require_once 'lib/Db.php';?>
-<?php try {
-    require_once 'lib/Session.php';
+<?php
 
-   if (empty(Session::get('CONTACT_USER'))) {
-    new Exception('User do not logged!');
-  }?>
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Edit list</title>
-    </head>
-    <body>
-    <form action="editList.php?id=<?= $_GET['id']?>" method="post">
-        <p>Enter new list name.</p>
-        <input type="text" name="newListName">
-        <input type="submit" value="Edit">
-    </form>
-    </body>
-    </html>
-<?php } catch (Exception $e) {
-        header('Location: index.php');
-      }
-?>
+require_once 'lib/Db.php';
+require_once 'lib/Session.php';
+
+if (empty(Session::get('CONTACT_USER'))) {
+    header('Location: index.php');
+}?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Edit list</title>
+</head>
+<body>
+<a href="index.php">Back</a>
+<form action="editList.php?id=<?= $_GET['id']?>" method="post">
+    <p>Enter new list name.</p>
+    <input type="text" name="newListName">
+    <input type="submit" value="Edit">
+</form>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <?php
-// automate all functions use foreach!
+
 require_once 'Db.php';
 
 class Contact extends Db {
@@ -109,18 +109,17 @@ class Contact extends Db {
         ]
     ];
 
-
     /**
      * Fill $fields array from input form.
      **/
     public function _set() {
+
         foreach ($this->fields as $key=>$value) {
             if(!empty($_POST[$key])) {
                 $this->fields[$key]['value'] = $_POST[$key];
             } else {
                 echo value['message'];
             }
-            echo $value['value'];
         }
     }
 

@@ -3,6 +3,7 @@
 require_once 'Db.php';
 
 class   ListContacts extends Db {
+
     private $name   = NULL;
     private $userId = NULL;
 
@@ -48,7 +49,6 @@ class   ListContacts extends Db {
     public function deleteList($id) {
         $sql = 'UPDATE Contacts_list SET status=0 WHERE id='.$id;
         $this->query($sql);
-        // TODO add delete function contact which exist in list
     }
 
     /**
