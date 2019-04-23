@@ -8,8 +8,8 @@ if(empty(Session::get('CONTACT_USER'))) {
 
 require_once  'lib/Contact.php';
 
-$contactId = $_GET['contact_id'];
-$id = $_GET['id'];
+$contactId = $_POST['contact_id'];
+$id = $_POST['list_id'];
 $contact = new Contact();
 $message = $contact->_set();
 if ($message == '') {

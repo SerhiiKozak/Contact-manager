@@ -2,7 +2,7 @@
 
 require_once 'Db.php';
 
-class   Contact extends Db {
+class Contact extends Db {
 
     public $fields = [
         'user_id' => [

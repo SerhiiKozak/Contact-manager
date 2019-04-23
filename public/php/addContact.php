@@ -9,7 +9,7 @@ if(empty(Session::get('CONTACT_USER'))) {
 require_once 'lib/Contact.php';
 
 $contact = new Contact();
-$id = $_GET['id'];
+$id = $_POST['list_id'];
 $contact->_set();
 $message = $contact->_set();
 if ($message == '')

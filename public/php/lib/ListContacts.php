@@ -43,7 +43,8 @@ class   ListContacts extends Db {
      **/
     public function editList($id, $name) {
         $this->editAt = date('Y-m-d H:i:s');
-        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name). ', edit_at='.$this->con->quote($this->editAt).
+        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name). ', edit_at='
+          .$this->con->quote($this->editAt).
           ' WHERE id='.$id;
         $this->query($sql);
     }
@@ -54,7 +55,8 @@ class   ListContacts extends Db {
      **/
     public function deleteList($id) {
         $this->editAt = date('Y-m-d H:i:s');
-        $sql = 'UPDATE Contacts_list SET status=0, edit_at='.$this->con->quote($this->editAt).' WHERE id='.$id;
+        $sql = 'UPDATE Contacts_list SET status=0, edit_at='.$this->con->quote($this->editAt).
+          ' WHERE id='.$id;
         $this->query($sql);
     }
 

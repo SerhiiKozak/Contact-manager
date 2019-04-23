@@ -13,8 +13,7 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
   $email     = $_POST['login'];
   $password  = $_POST['password'];
   $cpassword = $_POST['cpassword'];
-  $createAt = date('Y-m-d H:i:s');
-  $editAt = date('Y-m-d H:i:s');
+  $editAt = $createAt = date('Y-m-d H:i:s');
 
   $sql = 'SELECT email FROM Users';
   $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
