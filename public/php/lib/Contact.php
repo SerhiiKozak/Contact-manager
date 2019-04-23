@@ -2,15 +2,17 @@
 
 require_once 'Db.php';
 
-class Contact extends Db {
+class   Contact extends Db {
 
     public $fields = [
         'user_id' => [
+            'rule' => '/^[0-9]{1,9}$/',
             'value' => '',
             'name' => '',
             'type' => 'hidden'
         ],
         'list_id' => [
+            'rule' => '/^[0-9]{1,9}$/',
             'value' => '',
             'name' => '',
             'type' => 'hidden'
@@ -26,7 +28,7 @@ class Contact extends Db {
             'rule' => '/^[a-zA-Z]+/',
             'value' => '',
             'message' => 'Last name field empty or incorrect',
-            'name' => 'Second Name',
+            'name' => 'Last Name',
             'type' => 'text'
         ],
         'email' => [
@@ -38,21 +40,21 @@ class Contact extends Db {
             'type' => 'text'
         ],
         'home' => [
-            'rule' => '/^[0-9]{6}/',
+            'rule' => '/^[0-9]{6}$/',
             'value' => '',
             'message' => 'Home field empty or incorrect',
             'name' => 'Home',
             'type' => 'text'
         ],
         'work' => [
-            'rule' => '/^[0-9]{6}/',
+            'rule' => '/^[0-9]{6}$/',
             'value' => '',
             'message' => 'Work field empty or incorrect',
             'name' => 'Work',
             'type' => 'text'
         ],
         'cell' => [
-            'rule' => '/\(?[0-9]{3}\)?([ -]?)([0-9]{3})\2([0-9]{4})/',
+            'rule' => '/^(\(?[0-9]{3}\)?([ -]?)([0-9]{3})([ -]?)([0-9]{4}))$/',
             'value' => '',
             'message' => 'Cell field empty or incorrect',
             'name' => 'Cell',
@@ -101,32 +103,38 @@ class Contact extends Db {
             'type' => 'text'
         ],
         'birth_date' => [
-            'rule' => '/^[0-9]{2}\.[0-2]{2}\.[0-9]{4}/',
+            'rule' => '/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/',
             'value' => '',
             'message' => 'Birth date field empty or incorrect',
             'name' => 'Birth Date',
             'type' => 'date'
         ],
         'create_at' => [
+            'rule' => '/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01]) \d{2}:\d{2}:\d{2}$/',
             'value' =>'',
             'type' => 'hidden'
         ],
-      'create_at' => [
-        'value' =>'',
-        'type' => 'hidden'
-      ]
+        'create_at' => [
+            'rule' => '/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01]) \d{2}:\d{2}:\d{2}$/',
+            'value' =>'',
+            'type' => 'hidden'
+        ]
     ];
 
     /**
      * Fill $fields array from input form.
      **/
     public function _set() {
+        if (empty($this->fields['create_at']['value'])) {
+          $this->fields['create_at']['value'] = date('Y-m-d H:i:s');
+        }
+        $this->fields['edit_at']['value'] = date('Y-m-d H:i:s');
 
         foreach ($this->fields as $key=>$value) {
-            if(!empty($_POST[$key])) {
-                $this->fields[$key]['value'] = $_POST[$key];
+            if(!empty($_POST[$key]) && preg_match($this->fields[$key]['rule'], $_POST[$key])) {
+              $this->fields[$key]['value'] = $_POST[$key];
             } else {
-                echo value['message'];
+              return $this->fields[$key]['message'];
             }
         }
     }
@@ -135,13 +143,15 @@ class Contact extends Db {
      * Create new contact and write contact data to database.
      **/
     public function createContact() {
-        $this->_set();
-        $sql = 'INSERT INTO `Contacts` SET ';
-        foreach ($this->fields as $key=>$value) {
+      $this->_set();
+      if ($this->message == '') {
+          $sql = 'INSERT INTO `Contacts` SET ';
+          foreach ($this->fields as $key=>$value) {
             $sql .= '`' . $key. '`='. $this->con->quote($value['value']). ',';
+          }
+          $sql = rtrim($sql,',');
+          $this->query($sql);
         }
-        $sql = rtrim($sql,',');
-        $this->query($sql);
     }
 
     /**
@@ -149,8 +159,8 @@ class Contact extends Db {
      * Changes status of the contact to 0.
      **/
     public function deleteContact($id) {
-
-        $sql = 'UPDATE `Contacts` SET status=0 WHERE id='. $this->con->quote($id);
+        $sql = 'UPDATE `Contacts` SET status=0, edit_at='.$this->con->quote(date('Y-m-d H:i:s')).' 
+        WHERE id='. $this->con->quote($id);
         $this->query($sql);
     }
 

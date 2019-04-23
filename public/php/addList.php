@@ -14,10 +14,12 @@ if (!empty($listName)) {
   if ($ls->listExist($listName) == false) {
     $ls->createList();
   } else {
-    echo 'List with this name already exist!';
+    $message = 'List with this name already exist!';
+    header('Location: index.php?message='.$message);
   }
 } else {
-  echo 'Enter list name!';
+  $message = 'Enter list name!';
+  header('Location: index.php?message='.$message);
 }
 
 require_once 'viewLists.phtml';

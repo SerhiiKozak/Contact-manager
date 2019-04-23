@@ -20,8 +20,9 @@ class   ListContacts extends Db {
      * Crete list and send data to database
      **/
     public function createList() {
-        $this->createAt = time();
-        $sql = "INSERT INTO `Contacts_list` (`list_name`, `user_id`, `create_at`) VALUES ('$this->name', '$this->userId', '$this->createAt')";
+        $this->editAt = $this->createAt = date('Y-m-d H:i:s');
+        $sql = "INSERT INTO `Contacts_list` (`list_name`, `user_id`, `create_at`, `edit_at`) 
+        VALUES ('$this->name', '$this->userId', '$this->createAt', '$this->editAt')";
         $this->query($sql);
     }
 
@@ -41,8 +42,9 @@ class   ListContacts extends Db {
      * Changes the current list name to the specified one.
      **/
     public function editList($id, $name) {
-        $this->editAt = time();
-        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name). ', edit_at='.$this->editAt.' WHERE id='.$id;
+        $this->editAt = date('Y-m-d H:i:s');
+        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name). ', edit_at='.$this->con->quote($this->editAt).
+          ' WHERE id='.$id;
         $this->query($sql);
     }
 
@@ -51,8 +53,8 @@ class   ListContacts extends Db {
      * Changes list status to 0.
      **/
     public function deleteList($id) {
-        $this->editAt = time();
-        $sql = 'UPDATE Contacts_list SET status=0, edit_at='.$this->editAt.' WHERE id='.$id;
+        $this->editAt = date('Y-m-d H:i:s');
+        $sql = 'UPDATE Contacts_list SET status=0, edit_at='.$this->con->quote($this->editAt).' WHERE id='.$id;
         $this->query($sql);
     }
 

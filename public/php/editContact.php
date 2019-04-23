@@ -8,9 +8,13 @@ if(empty(Session::get('CONTACT_USER'))) {
 
 require_once  'lib/Contact.php';
 
+$contactId = $_GET['contact_id'];
 $id = $_GET['id'];
 $contact = new Contact();
-$contact->editContact($id);
-echo 'Contact have been edited.';
-require_once 'viewContacts.phtml';
-
+$message = $contact->_set();
+if ($message == '') {
+  $contact->editContact($contactId);
+  header('Location: showContacts.php?id='.$id);
+}else {
+  header('Location: showContact.php?action=edit&contact_id='.$contactId.'&id='.$id.'&message='.$message);
+}

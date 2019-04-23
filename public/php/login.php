@@ -23,15 +23,12 @@ if ($_POST['login']!='' && $_POST['password']!='') {
     $session = new Session();
     $session->set('CONTACT_USER', $userData);
     header('Location: index.php');
-    //include_once 'viewLists.phtml';
   } else {
-    echo 'Login or password incorrect!';
-    require_once '../login.html';
+    $message = 'Login or password incorrect!';
+    header('Location: index.php?message='.$message);
   }
 
 } else {
-  echo 'Pls enter login and password!';
-  require_once '../login.html';
+  $message = 'Please enter login and password!';
+  header('Location: index.php?message='.$message);
 }
-
-

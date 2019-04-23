@@ -11,11 +11,9 @@ $listId = $_GET['id'];
 $name = $_POST['newListName'];
 $ls = new ListContacts();
 
-if ($ls->listExist($name) == true) {
+if ($ls->listExist($name) == false) {
   $ls ->editList($listId, $name);
-  echo 'List have been edited';
   header('Location: index.php');
 } else {
   header('Location: index.php');
 }
-

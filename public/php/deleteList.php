@@ -12,5 +12,5 @@ $ls = new ListContacts();
 $id = $_GET['id'];
 
 $ls->deleteList($id);
-echo 'List have been deleted.';
-include_once 'viewLists.phtml';
+$message = 'List have been deleted.';
+header('Location: index.php?message='.$message);

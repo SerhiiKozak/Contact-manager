@@ -13,6 +13,8 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
   $email     = $_POST['login'];
   $password  = $_POST['password'];
   $cpassword = $_POST['cpassword'];
+  $createAt = date('Y-m-d H:i:s');
+  $editAt = date('Y-m-d H:i:s');
 
   $sql = 'SELECT email FROM Users';
   $result = $db->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -20,8 +22,8 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
   foreach ($result as $row => $data) {
     if ($data['email'] == $email) {
       $userExist = true;
-      echo 'User already exists!';
-      require_once 'registration.php';
+      $message = 'User already exists!';
+      header('Location: ../registrationForm.php?message='.$message);
       break;
     } else {
       $userExist = false;
@@ -29,8 +31,8 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
   }
   if ($password == $cpassword) {
     if ($userExist == false) {
-      $sql = "INSERT INTO `Users` (`first_name`, `last_name`, `email`, `password`)
-        VALUES ('$firstName', '$lastName', '$email', '$password')";
+      $sql = "INSERT INTO `Users` (`first_name`, `last_name`, `email`, `password`, `create_at`, `edit_at`)
+        VALUES ('$firstName', '$lastName', '$email', '$password', '$createAt', '$editAt')";
       $db->query($sql);
       $sql = "SELECT id FROM Users WHERE email=" . $db->quote($email);
       $result = $db-> query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -42,10 +44,10 @@ if ($_POST['firstName']!='' && $_POST['lastName']!='' && $_POST['login']!='' && 
       }
 
   } else {
-      echo 'Passwords do not match!';
-      require_once 'registration.php';
+      $message = 'Passwords do not match!';
+      header('Location: ../registrationForm.php?message='.$message);
   }
 } else {
-  require_once 'registration.php';
-  echo 'Pls fill all fields';
+    $message = 'Please fill all fields!';
+    header('Location: ../registrationForm.php?message='.$message);;
 }

@@ -28,7 +28,7 @@ if (!empty($id)) {
 <?php if ($_GET['action'] == 'add') : ?>
 <form action="addContact.php?id=<?= $_GET['id']?>" method="post">
 <?php elseif ($_GET['action'] == 'edit') : ?>
-<form action="editContact.php?id=<?= $id?>" method="post">
+<form action="editContact.php?contact_id=<?= $id?>&id=<?= $_GET['id']?>" method="post">
 <?php endif; ?>
     <table>
         <?php foreach($fields as $key => $value) : ?>
@@ -50,5 +50,3 @@ if (!empty($id)) {
 </form>
 </body>
 </html>
-
-
