@@ -159,14 +159,13 @@ class Contact extends Db {
      * Changes status of the contact to 0.
      **/
     public function deleteContact($id) {
-        $sql = 'UPDATE 
+        $this->query("UPDATE 
                   `Contacts` 
                 SET 
                   status=0, 
-                  edit_at='.$this->con->quote(date('Y-m-d H:i:s')).' 
+                  edit_at=".$this->con->quote(date('Y-m-d H:i:s'))." 
                 WHERE 
-                  id='. $this->con->quote($id);
-        $this->query($sql);
+                  id=". $this->con->quote($id));
     }
 
     /**
@@ -180,13 +179,13 @@ class Contact extends Db {
             $sql .= '`' . $key . '`=' . $this->con->quote($value['value']). ',';
         }
         $sql = rtrim($sql, ',');
-        $sql .=' WHERE id='.$id;
+        $sql .=' WHERE id='.$this->con->quote($id);
         $this->query($sql);
     }
 
     /**
      * @param int $id
-     * @return array $result
+     * @return array $result  
      * Return array of contacts.
      **/
     public function getContacts($id) {

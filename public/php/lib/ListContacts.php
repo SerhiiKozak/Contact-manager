@@ -21,12 +21,11 @@ class   ListContacts extends Db {
      **/
     public function createList() {
         $this->editAt = $this->createAt = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO 
+        $this->query("INSERT INTO 
                   `Contacts_list` 
                   (`list_name`, `user_id`, `create_at`, `edit_at`) 
                 VALUES 
-                  ('$this->name', '$this->userId', '$this->createAt', '$this->editAt')";
-        $this->query($sql);
+                  ('$this->name', '$this->userId', '$this->createAt', '$this->editAt')");
     }
 
     /**
@@ -40,7 +39,7 @@ class   ListContacts extends Db {
                   list_name, 
                   status 
                 FROM Contacts_list 
-                WHERE user_id =' . $id;
+                WHERE user_id =' . $this->con->quote($id);
         $result = $this->query($sql)->fetchAll();
         return $result;
     }
@@ -52,13 +51,12 @@ class   ListContacts extends Db {
      **/
     public function editList($id, $name) {
         $this->editAt = date('Y-m-d H:i:s');
-        $sql = 'UPDATE 
+        $this->query( "UPDATE 
                   Contacts_list 
                 SET 
-                  list_name='.$this->con->quote($name).', 
-                  edit_at='.$this->con->quote($this->editAt).'
-                WHERE id='.$id;
-        $this->query($sql);
+                  list_name=".$this->con->quote($name).", 
+                  edit_at=".$this->con->quote($this->editAt)."
+                WHERE id=".$this->con->quote($id));
     }
 
     /**
@@ -67,13 +65,12 @@ class   ListContacts extends Db {
      **/
     public function deleteList($id) {
         $this->editAt = date('Y-m-d H:i:s');
-        $sql = 'UPDATE 
+        $this->query("UPDATE 
                   Contacts_list 
                 SET 
                   status=0, 
-                  edit_at='.$this->con->quote($this->editAt).'
-                WHERE id='.$id;
-        $this->query($sql);
+                  edit_at=".$this->con->quote($this->editAt)."
+                WHERE id=".$this->con->quote($id));
     }
 
     /**
