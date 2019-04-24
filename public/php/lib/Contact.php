@@ -159,8 +159,13 @@ class Contact extends Db {
      * Changes status of the contact to 0.
      **/
     public function deleteContact($id) {
-        $sql = 'UPDATE `Contacts` SET status=0, edit_at='.$this->con->quote(date('Y-m-d H:i:s')).' 
-        WHERE id='. $this->con->quote($id);
+        $sql = 'UPDATE 
+                  `Contacts` 
+                SET 
+                  status=0, 
+                  edit_at='.$this->con->quote(date('Y-m-d H:i:s')).' 
+                WHERE 
+                  id='. $this->con->quote($id);
         $this->query($sql);
     }
 

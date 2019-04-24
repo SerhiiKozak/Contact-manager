@@ -21,8 +21,11 @@ class   ListContacts extends Db {
      **/
     public function createList() {
         $this->editAt = $this->createAt = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO `Contacts_list` (`list_name`, `user_id`, `create_at`, `edit_at`) 
-        VALUES ('$this->name', '$this->userId', '$this->createAt', '$this->editAt')";
+        $sql = "INSERT INTO 
+                  `Contacts_list` 
+                  (`list_name`, `user_id`, `create_at`, `edit_at`) 
+                VALUES 
+                  ('$this->name', '$this->userId', '$this->createAt', '$this->editAt')";
         $this->query($sql);
     }
 
@@ -31,7 +34,13 @@ class   ListContacts extends Db {
      * Get array of list objects.
      **/
     public function getLists($id) {
-        $sql = 'SELECT id, user_id, list_name, status FROM Contacts_list WHERE user_id =' . $id;
+        $sql = 'SELECT 
+                  id, 
+                  user_id, 
+                  list_name, 
+                  status 
+                FROM Contacts_list 
+                WHERE user_id =' . $id;
         $result = $this->query($sql)->fetchAll();
         return $result;
     }
@@ -43,9 +52,12 @@ class   ListContacts extends Db {
      **/
     public function editList($id, $name) {
         $this->editAt = date('Y-m-d H:i:s');
-        $sql = 'UPDATE Contacts_list SET list_name='.$this->con->quote($name). ', edit_at='
-          .$this->con->quote($this->editAt).
-          ' WHERE id='.$id;
+        $sql = 'UPDATE 
+                  Contacts_list 
+                SET 
+                  list_name='.$this->con->quote($name).', 
+                  edit_at='.$this->con->quote($this->editAt).'
+                WHERE id='.$id;
         $this->query($sql);
     }
 
@@ -55,8 +67,12 @@ class   ListContacts extends Db {
      **/
     public function deleteList($id) {
         $this->editAt = date('Y-m-d H:i:s');
-        $sql = 'UPDATE Contacts_list SET status=0, edit_at='.$this->con->quote($this->editAt).
-          ' WHERE id='.$id;
+        $sql = 'UPDATE 
+                  Contacts_list 
+                SET 
+                  status=0, 
+                  edit_at='.$this->con->quote($this->editAt).'
+                WHERE id='.$id;
         $this->query($sql);
     }
 

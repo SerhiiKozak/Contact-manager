@@ -28,7 +28,7 @@ if (!empty($id)) {
 <?php if ($_GET['action'] == 'add') : ?>
 <form action="addContact.php" method="post">
 <?php elseif ($_GET['action'] == 'edit') : ?>
-<form action="editContact.php?contact_id=<?= $id?>" method="post">
+<form action="editContact.php" method="post">
     <input type="hidden" name="contact_id" value="<?= $id?>">
 <?php endif; ?>
     <table>
