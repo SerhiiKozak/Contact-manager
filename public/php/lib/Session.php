@@ -43,7 +43,7 @@ class Session {
      * Clear array of SESSION parameters and destroy Session.
      **/
     public static function destroy() {
-        if (self::$session_start) {
+        if (!self::$session_start) {
             session_start();
             self::$session_start = session_start();
         }
