@@ -185,7 +185,7 @@ class Contact extends Db {
 
     /**
      * @param int $id
-     * @return array $result  
+     * @return array $result
      * Return array of contacts.
      **/
     public function getContacts($id) {

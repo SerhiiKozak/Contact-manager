@@ -33,14 +33,14 @@ class   ListContacts extends Db {
      * Get array of list objects.
      **/
     public function getLists($id) {
-        $sql = 'SELECT 
+        $result = $this->query("SELECT 
                   id, 
                   user_id, 
                   list_name, 
                   status 
                 FROM Contacts_list 
-                WHERE user_id =' . $this->con->quote($id);
-        $result = $this->query($sql)->fetchAll();
+                WHERE user_id =" . (int)$id
+        )->fetchAll();
         return $result;
     }
 
@@ -56,7 +56,7 @@ class   ListContacts extends Db {
                 SET 
                   list_name=".$this->con->quote($name).", 
                   edit_at=".$this->con->quote($this->editAt)."
-                WHERE id=".$this->con->quote($id));
+                WHERE id=".(int)$id);
     }
 
     /**
@@ -70,7 +70,7 @@ class   ListContacts extends Db {
                 SET 
                   status=0, 
                   edit_at=".$this->con->quote($this->editAt)."
-                WHERE id=".$this->con->quote($id));
+                WHERE id=".(int)$id);
     }
 
     /**
