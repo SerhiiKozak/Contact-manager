@@ -2,10 +2,14 @@
 
 require_once 'lib/Db.php';
 require_once 'lib/Session.php';
+require_once 'lib/ListContacts.php';
 
 if (empty(Session::get('CONTACT_USER'))) {
     header('Location: index.php');
-}?>
+}
+$list = new ListContacts();
+$listName = $list->getList($_GET['id']);
+?>
 
 <!DOCTYPE html>
 <html>
@@ -15,9 +19,10 @@ if (empty(Session::get('CONTACT_USER'))) {
 </head>
 <body>
 <a href="index.php">Back</a>
+<a href="logout.php">Logout</a>
 <form action="editList.php?id=<?= $_GET['id']?>" method="post">
     <p>Enter new list name.</p>
-    <input type="text" name="newListName">
+    <input type="text" name="newListName" value="<?= $listName;?>">
     <input type="submit" value="Edit">
 </form>
 </body>

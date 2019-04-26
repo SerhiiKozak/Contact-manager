@@ -25,6 +25,7 @@ if (!empty($id)) {
     <title>Add contact</title>
 </head>
 <body>
+<a href="logout.php">Logout</a>
 <?php if ($_GET['action'] == 'add') : ?>
 <form action="addContact.php" method="post">
 <?php elseif ($_GET['action'] == 'edit') : ?>

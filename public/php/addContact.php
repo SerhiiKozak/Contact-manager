@@ -12,8 +12,7 @@ $contact = new Contact();
 $id = $_POST['list_id'];
 $contact->_set();
 $message = $contact->_set();
-if ($message == '')
-{
+if ($message == '') {
   $contact->createContact();
   header('Location: showContacts.php?id='.$id);
 } else {

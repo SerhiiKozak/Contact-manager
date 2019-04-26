@@ -20,7 +20,10 @@ class Db {
      * Create database connection.
      **/
   private function createConnect() {
-      $con = new PDO('mysql:host=' . $this->hostName . '; dbname=' . $this->dbName, $this->userName, $this->pass);
+      $con = new PDO('mysql:host=' . $this->hostName .
+                    '; dbname=' . $this->dbName,
+                     $this->userName,
+                     $this->pass);
       $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       return $con;
   }
@@ -34,8 +37,11 @@ class Db {
     return $stmt;
   }
 
-  public function  quote($value) {
+  public function quote($value) {
     return $this->con->quote($value);
   }
 
+  public function getPDO() {
+    return $this->con;
+  }
 }

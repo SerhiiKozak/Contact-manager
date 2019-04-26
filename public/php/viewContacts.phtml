@@ -22,6 +22,7 @@ if (empty(Session::get('CONTACT_USER'))) {
 <body>
     <a href="index.php">Back</a>
     <a href="showContact.php?action=add&id=<?= $id ?>">Add</a>
+    <a href="logout.php">Logout</a>
     <table>
         <tr>
            <?php foreach ($fields as $key => $value) : ?>

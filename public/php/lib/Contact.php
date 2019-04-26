@@ -130,7 +130,7 @@ class Contact extends Db {
         }
         $this->fields['edit_at']['value'] = date('Y-m-d H:i:s');
 
-        foreach ($this->fields as $key=>$value) {
+        foreach ($this->fields as $key => $value) {
             if(!empty($_POST[$key]) && preg_match($this->fields[$key]['rule'], $_POST[$key])) {
               $this->fields[$key]['value'] = $_POST[$key];
             } else {
@@ -147,7 +147,7 @@ class Contact extends Db {
       if ($this->message == '') {
           $sql = 'INSERT INTO `Contacts` SET ';
           foreach ($this->fields as $key=>$value) {
-            $sql .= '`' . $key. '`='. $this->con->quote($value['value']). ',';
+            $sql .= '`' . $key. '`=' . $this->con->quote($value['value']) . ',';
           }
           $sql = rtrim($sql,',');
           $this->query($sql);
@@ -162,10 +162,10 @@ class Contact extends Db {
         $this->query("UPDATE 
                   `Contacts` 
                 SET 
-                  status=0, 
-                  edit_at=".$this->con->quote(date('Y-m-d H:i:s'))." 
+                  status = 0, 
+                  edit_at = ".$this->con->quote(date('Y-m-d H:i:s'))." 
                 WHERE 
-                  id=". $this->con->quote($id));
+                  id = " . (int)$id);
     }
 
     /**
@@ -179,7 +179,7 @@ class Contact extends Db {
             $sql .= '`' . $key . '`=' . $this->con->quote($value['value']). ',';
         }
         $sql = rtrim($sql, ',');
-        $sql .=' WHERE id='.$this->con->quote($id);
+        $sql .= ' WHERE id=' . (int)$id;
         $this->query($sql);
     }
 
@@ -189,8 +189,11 @@ class Contact extends Db {
      * Return array of contacts.
      **/
     public function getContacts($id) {
-        $sql = 'SELECT * FROM Contacts WHERE list_id='.$id;
-        $result = $this->query($sql)->fetchAll();
+        $result = $this->query("SELECT * 
+            FROM 
+              Contacts 
+            WHERE 
+              list_id = " . (int)$id)->fetchAll();
         return $result;
     }
 
@@ -200,8 +203,11 @@ class Contact extends Db {
      * Return array of contact parameters.
      **/
     public function getContact($id) {
-        $sql = 'SELECT * FROM Contacts WHERE id='.$id;
-        $result = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        $result = $this->query("SELECT * 
+            FROM 
+              Contacts 
+            WHERE 
+              id = " . (int)$id)->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
