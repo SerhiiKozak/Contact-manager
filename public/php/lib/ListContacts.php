@@ -2,7 +2,7 @@
 
 require_once 'Db.php';
 
-class   ListContacts extends Db {
+class  ListContacts extends Db {
 
     private $name     = NULL;
     private $userId   = NULL;
@@ -35,8 +35,7 @@ class   ListContacts extends Db {
      * Get array of list objects.
      **/
     public function getLists($id) {
-        $result = $this->query(
-          "SELECT 
+        $result = $this->query("SELECT 
                   id, 
                   user_id, 
                   list_name, 
@@ -53,8 +52,7 @@ class   ListContacts extends Db {
      * Get list name from database.
      **/
     public function getList($id) {
-        $result = $this->query(
-          "SELECT list_name
+        $result = $this->query("SELECT list_name
            FROM Contacts_list
            WHERE id = " . (int)$id)->fetchColumn();
         return $result;

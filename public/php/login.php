@@ -41,4 +41,3 @@ if ($login != $dbEmail || !password_verify($password, $dbPass)) {
 $session = new Session();
 $session->set('CONTACT_USER', $userData);
 header('Location: index.php');
-

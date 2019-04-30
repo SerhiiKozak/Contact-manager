@@ -24,6 +24,10 @@ class User extends Db {
     $this->cpassword = $_POST['cpassword'];
   }
 
+  /**
+   * @return string
+   * Check if registration form filled correct if yes than return empty string if not return error message.
+   */
   public function checkForm() {
 
     $emailExp = '/^[a-zA-z0-9_-]+@[a-zA-Z]+\.[a-zA-z]{2,}$/';
@@ -34,12 +38,12 @@ class User extends Db {
       || $_POST['password'] == ''
       || $_POST['cpassword'] == '') {
 
-      return $message = 'Please fill all fields!';
+      return $message = 'Please fill in all fields!';
       exit;
     }
 
     if (!preg_match($emailExp, $_POST['login'])) {
-      return $message = 'Wrong format of E-mail field!';
+      return $message = 'Invalid email!';
       exit;
     }
 
@@ -61,6 +65,10 @@ class User extends Db {
     return $message = '';
   }
 
+  /**
+   * @return array
+   * Create User and return user data.
+   */
   public function createUser() {
     $editAt = $createAt = date('Y-m-d H:i:s');
     $this->query(
