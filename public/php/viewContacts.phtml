@@ -4,7 +4,7 @@ require_once 'lib/Session.php';
 require_once 'lib/Contact.php';
 
 $cnt = new Contact();
-$id = $_GET['id'];
+$id = $_GET['list_id'];
 $contacts = $cnt->getContacts($id);
 $fields = $cnt->getFields();
 

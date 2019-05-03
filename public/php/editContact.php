@@ -10,11 +10,11 @@ require_once  'lib/Contact.php';
 
 $contactId = $_POST['contact_id'];
 $id = $_POST['list_id'];
-$contact = new Contact();
-$message = $contact->_set();
-if ($message == '') {
+try {
+  $contact = new Contact();
+  $contact->_validate();
   $contact->editContact($contactId);
-  header('Location: showContacts.php?id='.$id);
-}else {
-  header('Location: showContact.php?action=edit&contact_id='.$contactId.'&id='.$id.'&message='.$message);
+  header('Location: showContacts.php?list_id='.$id);
+} catch (ValidateExceptions $e) {
+  header('Location: showContact.php?action=edit&contact_id='.$contactId.'&id='.$id.'&message='.$e->getMessage());
 }

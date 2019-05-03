@@ -114,7 +114,7 @@ class Contact extends Db {
             'value' =>'',
             'type' => 'hidden'
         ],
-        'create_at' => [
+        'edit_at' => [
             'rule' => '/^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01]) \d{2}:\d{2}:\d{2}$/',
             'value' =>'',
             'type' => 'hidden'
@@ -131,19 +131,45 @@ class Contact extends Db {
         $this->fields['edit_at']['value'] = date('Y-m-d H:i:s');
 
         foreach ($this->fields as $key => $value) {
-            if(!empty($_POST[$key]) && preg_match($this->fields[$key]['rule'], $_POST[$key])) {
+          if(isset($this->fields[$key]['rule'])) {
+            if(preg_match($this->fields[$key]['rule'], $_POST[$key])) {
               $this->fields[$key]['value'] = $_POST[$key];
-            } else {
-              return $this->fields[$key]['message'];
             }
+          }
         }
+    }
+
+  /**
+   * @throws ValidateExceptions
+   * Check fields for correct format if fields was empty or incorrect throw exception.
+   */
+    public function _validate() {
+      foreach ($this->fields as $key => $value) {
+        if (isset($this->fields[$key]['rule']) && isset($this->fields[$key]['message'])) {
+          if (empty($_POST[$key]) || !preg_match($this->fields[$key]['rule'], $_POST[$key])) {
+            require_once 'exceptions/ValidateExceptions.php';
+            throw new ValidateExceptions($this->fields[$key]['message']);
+          }
+        }
+      }
+    }
+
+  /**
+   * @return array
+   * Create and return associative array.
+   */
+    public function getValues() {
+      $result = [];
+      foreach ($this->fields as $key => $value) {
+        $result[$key] = $value['value'];
+      }
+      return $result;
     }
 
     /**
      * Create new contact and write contact data to database.
      **/
     public function createContact() {
-      $this->_set();
       if ($this->message == '') {
           $sql = 'INSERT INTO `Contacts` SET ';
           foreach ($this->fields as $key=>$value) {
@@ -159,7 +185,8 @@ class Contact extends Db {
      * Changes status of the contact to 0.
      **/
     public function deleteContact($id) {
-        $this->query("UPDATE 
+        $this->query("
+                UPDATE 
                   `Contacts` 
                 SET 
                   status = 0, 
@@ -189,7 +216,9 @@ class Contact extends Db {
      * Return array of contacts.
      **/
     public function getContacts($id) {
-        $result = $this->query("SELECT * 
+        $result = $this->query("
+            SELECT 
+              * 
             FROM 
               Contacts 
             WHERE 
@@ -203,14 +232,20 @@ class Contact extends Db {
      * Return array of contact parameters.
      **/
     public function getContact($id) {
-        $result = $this->query("SELECT * 
+        $result = $this->query("
+            SELECT 
+              * 
             FROM 
               Contacts 
             WHERE 
-              id = " . (int)$id)->fetchAll(PDO::FETCH_ASSOC);
+              id = " . (int)$id)->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
 
+  /**
+   * @return array
+   * Return array of fields.
+   */
     public function getFields() {
       return $this->fields;
     }

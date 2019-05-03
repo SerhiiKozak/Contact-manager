@@ -7,14 +7,15 @@ if(empty(Session::get('CONTACT_USER'))) {
 }
 
 require_once 'lib/Contact.php';
-
 $contact = new Contact();
 $id = $_POST['list_id'];
 $contact->_set();
-$message = $contact->_set();
-if ($message == '') {
+try {
+  $contact->_validate();
   $contact->createContact();
-  header('Location: showContacts.php?id='.$id);
-} else {
-  header('Location: showContact.php?action=add&id='.$id.'&message='.$message);
+  unset($_SESSION['fields']);
+  header('Location: showContacts.php?list_id='.$id);
+} catch (ValidateExceptions $e) {
+  $_SESSION['fields'] = $contact->getValues();
+  header('Location: showContact.php?action=add&id='.$id.'&message='.$e->getMessage());
 }

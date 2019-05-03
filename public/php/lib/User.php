@@ -39,18 +39,19 @@ class User extends Db {
       || $_POST['cpassword'] == '') {
 
       return $message = 'Please fill in all fields!';
-      exit;
     }
 
     if (!preg_match($emailExp, $_POST['login'])) {
       return $message = 'Invalid email!';
-      exit;
     }
 
     $result = $this->query("
-      SELECT email 
-      FROM Users
-      WHERE email = ".$this->quote($_POST['login'])
+      SELECT 
+         email 
+      FROM 
+         Users
+      WHERE 
+         email = ".$this->quote($_POST['login'])
     )->fetchColumn();
 
     if ($result != false) {
@@ -71,18 +72,25 @@ class User extends Db {
    */
   public function createUser() {
     $editAt = $createAt = date('Y-m-d H:i:s');
-    $this->query(
-      "INSERT INTO `Users`
-            SET `first_name` = ".$this->quote($this->firstName).
-              " ,`last_name` = ".$this->quote($this->lastName).
-              " ,`email` = ".$this->quote($this->email).
-              " ,`password` = ".$this->quote(password_hash($this->password, PASSWORD_BCRYPT)).
-              " ,`create_at` = ".$this->quote($createAt).
-              " ,`edit_at` = ".$this->quote($editAt).
-              " ,`status` = 1"
+    $this->query("
+            INSERT INTO 
+              `Users`
+            SET 
+              `first_name` = ".$this->quote($this->firstName). " ,
+              `last_name` = ".$this->quote($this->lastName). " ,
+              `email` = ".$this->quote($this->email). " ,
+              `password` = ".$this->quote(password_hash($this->password, PASSWORD_BCRYPT)). " ,
+              `create_at` = ".$this->quote($createAt). " ,
+              `edit_at` = ".$this->quote($editAt). " ,
+              `status` = 1"
     );
     $userId = $this->getPDO()->lastInsertId();
-    $userData = array('id' => $userId, 'fName' => $this->firstName, 'lName' => $this->lastName, 'email' => $this->email);
-    return $userData;
+
+    return [
+      'id' => $userId,
+      'fName' => $this->firstName,
+      'lName' => $this->lastName,
+      'email' => $this->email
+    ];
   }
 }

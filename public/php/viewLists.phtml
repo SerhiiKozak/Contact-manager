@@ -43,7 +43,7 @@ $lists = $ls->getLists($userData['id']);
         <?php if ($list['status'] == '1') :?>
         <tr>
             <td>
-                <a href="showContacts.php?id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
+                <a href="showContacts.php?list_id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
             </td>
             <td>
                 <a href="showList.php?id=<?= $list['id'] ?>">Edit</a>

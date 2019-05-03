@@ -16,21 +16,22 @@ class Db {
     $this->con      = $this->createConnect();
   }
 
-    /**
-     * Create database connection.
-     **/
+  /**
+   * Create database connection.
+   **/
   private function createConnect() {
-      $con = new PDO('mysql:host=' . $this->hostName .
-                    '; dbname=' . $this->dbName,
-                     $this->userName,
-                     $this->pass);
+      $con = new PDO(
+          'mysql:host=' . $this->hostName . '; 
+               dbname=' . $this->dbName,
+               $this->userName,
+               $this->pass);
       $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       return $con;
   }
 
-    /**
-     * Send query to database.
-     **/
+  /**
+   * Send query to database.
+   **/
   public function query($sql) {
     $stmt = $this->con->prepare($sql);
     $stmt->execute();

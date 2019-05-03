@@ -11,11 +11,17 @@ $id = $_GET['contact_id'];
 if (!empty($id)) {
     $result = $contact->getContact ($id);
     foreach ($fields as $key => $value) {
-        $fields[$key]['value'] = $result[0][$key];
+        $fields[$key]['value'] = $result[$key];
     }
 } else {
   $fields['user_id']['value'] = $user['id'];
   $fields['list_id']['value'] = $_GET['id'];
+  $result = Session::get('fields');
+  foreach ($fields as $key => $value) {
+      if (!empty($result)){
+        $fields[$key]['value'] = $result[$key];
+      }
+  }
 }?>
 
 <!DOCTYPE html>
@@ -46,7 +52,7 @@ if (!empty($id)) {
             <?php elseif ($_GET['action'] == 'edit') : ?>
             <td> <input type="submit" value="Edit"></td>
             <?php endif; ?>
-            <td> <a href="showContacts.php?id=<?= $_GET['id'];?>">Cancel</a> </td>
+            <td> <a href="showContacts.php?list_id=<?= $_GET['id'];?>">Cancel</a> </td>
         </tr>
     </table>
 </form>

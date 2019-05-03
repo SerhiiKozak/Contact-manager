@@ -2,7 +2,7 @@
 
 require_once 'Db.php';
 
-class  ListContacts extends Db {
+class ListContacts extends Db {
 
     private $name     = NULL;
     private $userId   = NULL;
@@ -21,13 +21,15 @@ class  ListContacts extends Db {
      **/
     public function createList() {
         $this->editAt = $this->createAt = date('Y-m-d H:i:s');
-        $this->query("INSERT 
-                INTO `Contacts_list` 
-                SET `list_name` = " . $this->name.
-                  " ,`user_id` = " . $this->userId.
-                  " ,`create_at` = " . $this->createAt.
-                  " ,`edit_at` = " . $this->editAt.
-                  " ,`status` = 1");
+        $this->query("
+                INSERT INTO 
+                  `Contacts_list` 
+                SET 
+                  `list_name` = " . $this->quote($this->name). " ,
+                  `user_id` = " . $this->quote($this->userId). " ,
+                  `create_at` = " . $this->quote($this->createAt). " ,
+                  `edit_at` = " . $this->quote($this->editAt). " ,
+                  `status` = 1");
     }
 
     /**
@@ -35,13 +37,16 @@ class  ListContacts extends Db {
      * Get array of list objects.
      **/
     public function getLists($id) {
-        $result = $this->query("SELECT 
+        $result = $this->query("
+                SELECT 
                   id, 
                   user_id, 
                   list_name, 
                   status 
-                FROM Contacts_list 
-                WHERE user_id = " . (int)$id
+                FROM 
+                  Contacts_list 
+                WHERE 
+                  user_id = " . (int)$id
         )->fetchAll();
         return $result;
     }
@@ -52,9 +57,14 @@ class  ListContacts extends Db {
      * Get list name from database.
      **/
     public function getList($id) {
-        $result = $this->query("SELECT list_name
-           FROM Contacts_list
-           WHERE id = " . (int)$id)->fetchColumn();
+        $result = $this->query("
+           SELECT 
+             list_name
+           FROM 
+             Contacts_list
+           WHERE 
+             id = " . (int)$id
+        )->fetchColumn();
         return $result;
     }
 
@@ -65,12 +75,14 @@ class  ListContacts extends Db {
      **/
     public function editList($id, $name) {
         $this->editAt = date('Y-m-d H:i:s');
-        $this->query( "UPDATE 
+        $this->query( "
+                UPDATE 
                   Contacts_list 
                 SET 
                   list_name = " . $this->con->quote($name).", 
                   edit_at = " . $this->con->quote($this->editAt)."
-                WHERE id = " . (int)$id);
+                WHERE 
+                  id = " . (int)$id);
     }
 
     /**
@@ -93,7 +105,6 @@ class  ListContacts extends Db {
      * Compere new name with name's in database and return TRUE if name already exist or FALSE if not.
      **/
     public function listExist($name) {
-
         $lists = $this->getLists($this->userId);
         foreach ($lists as $key => $data) {
             if ($data['list_name'] == $name) {
@@ -103,6 +114,5 @@ class  ListContacts extends Db {
                 return false;
             }
         }
-
     }
 }

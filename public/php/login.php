@@ -10,28 +10,26 @@ if ($_POST['login'] == '' || $_POST['password'] == '') {
 }
 
 $db = new Db;
-
 $login = $_POST['login'];
 $password = $_POST['password'];
-
 
 $result = $db-> query("SELECT * 
     FROM 
       Users 
     WHERE 
       email = " .$db->quote($login)
-)->fetchAll(PDO::FETCH_ASSOC);
+)->fetch(PDO::FETCH_ASSOC);
 
-$data = $result[0];
-$dbEmail = $data['email'];
-$dbPass = $data['password'];
-$dbFirstName = $data['first_name'];
-$dbLastName = $data['last_name'];
-$userId = $data['id'];
-$userData = array('id' => $userId,
-                  'fName' => $dbFirstName,
-                  'lName' => $dbLastName,
-                  'email' => $dbEmail);
+$dbEmail = $result['email'];
+$dbPass = $result['password'];
+$dbFirstName = $result['first_name'];
+$dbLastName = $result['last_name'];
+$userId = $result['id'];
+$userData = [
+  'id' => $userId,
+  'fName' => $dbFirstName,
+  'lName' => $dbLastName,
+  'email' => $dbEmail];
 
 if ($login != $dbEmail || !password_verify($password, $dbPass)) {
   $message = 'Login or password incorrect!';
