@@ -13,10 +13,10 @@ class User extends Db {
 
   public function __construct() {
     parent::__construct();
-    $this->_set();
+    $this->set();
   }
 
-  public function _set() {
+  public function set() {
     $this->firstName = $_POST['firstName'];
     $this->lastName = $_POST['lastName'];
     $this->email = $_POST['login'];
@@ -38,11 +38,11 @@ class User extends Db {
       || $_POST['password'] == ''
       || $_POST['cpassword'] == '') {
 
-      return $message = 'Please fill in all fields!';
+      return  'Please fill in all fields!';
     }
 
     if (!preg_match($emailExp, $_POST['login'])) {
-      return $message = 'Invalid email!';
+      return 'Invalid email!';
     }
 
     $result = $this->query("
@@ -55,15 +55,13 @@ class User extends Db {
     )->fetchColumn();
 
     if ($result != false) {
-    return $message = 'User already exists!';
-    exit;
+    return 'User already exists!';
     }
 
     if ($this->password != $this->cpassword) {
       return $message = 'Passwords do not match!';
-      exit;
     }
-    return $message = '';
+    return;
   }
 
   /**
@@ -76,12 +74,12 @@ class User extends Db {
             INSERT INTO 
               `Users`
             SET 
-              `first_name` = ".$this->quote($this->firstName). " ,
-              `last_name` = ".$this->quote($this->lastName). " ,
-              `email` = ".$this->quote($this->email). " ,
-              `password` = ".$this->quote(password_hash($this->password, PASSWORD_BCRYPT)). " ,
-              `create_at` = ".$this->quote($createAt). " ,
-              `edit_at` = ".$this->quote($editAt). " ,
+              `first_name` = " . $this->quote($this->firstName) . " ,
+              `last_name` = " . $this->quote($this->lastName) . " ,
+              `email` = " . $this->quote($this->email) . " ,
+              `password` = " . $this->quote(password_hash($this->password, PASSWORD_BCRYPT)) . " ,
+              `create_at` = " . $this->quote($createAt) . " ,
+              `edit_at` = " . $this->quote($editAt) . " ,
               `status` = 1"
     );
     $userId = $this->getPDO()->lastInsertId();
@@ -92,5 +90,34 @@ class User extends Db {
       'lName' => $this->lastName,
       'email' => $this->email
     ];
+  }
+
+  /**
+   *
+   */
+  public function login() {
+    $result = $this-> query("SELECT * 
+    FROM 
+      Users 
+    WHERE 
+      email = " . $this->quote($_POST['login'])
+    )->fetch(PDO::FETCH_ASSOC);
+
+    $userData = [
+      'id' => $result['id'],
+      'fName' => $result['first_name'],
+      'lName' => $result['last_name'],
+      'email' => $result['email']];
+
+    if ($_POST['login'] != $result['email']|| !password_verify($_POST['password'], $result['password'])) {
+      $message = 'Login or password incorrect!';
+      $data = ['login' => $_POST['login'], 'password' => $_POST['password']];
+      $hash = base64_encode(json_encode($data));
+      header('Location: ../index.php?path=login&hash=' . $hash . '&message=' . $message);
+      exit;
+    }
+    $session = new Session();
+    $session->set('CONTACT_USER', $userData);
+    header('Location: ../index.php?path=viewLists');
   }
 }

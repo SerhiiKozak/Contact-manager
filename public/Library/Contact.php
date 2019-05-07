@@ -124,30 +124,28 @@ class Contact extends Db {
     /**
      * Fill $fields array from input form.
      **/
-    public function _set() {
-        if (empty($this->fields['create_at']['value'])) {
-          $this->fields['create_at']['value'] = date('Y-m-d H:i:s');
-        }
-        $this->fields['edit_at']['value'] = date('Y-m-d H:i:s');
+    public function set() {
 
         foreach ($this->fields as $key => $value) {
-          if(isset($this->fields[$key]['rule'])) {
-            if(preg_match($this->fields[$key]['rule'], $_POST[$key])) {
-              $this->fields[$key]['value'] = $_POST[$key];
-            }
+          if (isset($this->fields[$key]['rule']) ) {
+            $this->fields[$key]['value'] = $_POST[$key];
           }
         }
+      if (empty($this->fields['create_at']['value'])) {
+        $this->fields['create_at']['value'] = date('Y-m-d H:i:s');
+      }
+      $this->fields['edit_at']['value'] = date('Y-m-d H:i:s');
     }
 
   /**
    * @throws ValidateExceptions
    * Check fields for correct format if fields was empty or incorrect throw exception.
    */
-    public function _validate() {
+    public function validate() {
       foreach ($this->fields as $key => $value) {
         if (isset($this->fields[$key]['rule']) && isset($this->fields[$key]['message'])) {
           if (empty($_POST[$key]) || !preg_match($this->fields[$key]['rule'], $_POST[$key])) {
-            require_once 'exceptions/ValidateExceptions.php';
+            require_once '/var/www/html/public/Exceptions/ValidateExceptions.php';
             throw new ValidateExceptions($this->fields[$key]['message']);
           }
         }

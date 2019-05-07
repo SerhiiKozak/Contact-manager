@@ -1,8 +1,7 @@
 <?php
 
-require_once 'lib/Db.php';
-require_once 'lib/Session.php';
-require_once 'lib/ListContacts.php';
+require_once ROOT_PATH . '/Library/Session.php';
+require_once ROOT_PATH . '/Library/ListContacts.php';
 
 if (empty(Session::get('CONTACT_USER'))) {
     header('Location: index.php');
@@ -18,9 +17,9 @@ $listName = $list->getList($_GET['id']);
     <title>Edit list</title>
 </head>
 <body>
-<a href="index.php">Back</a>
-<a href="logout.php">Logout</a>
-<form action="editList.php?id=<?= $_GET['id']?>" method="post">
+<a href="../index.php?path=viewLists">Back</a>
+<a href="../index.php?path=logout">Logout</a>
+<form action="../index.php?path=editList&id=<?= $_GET['id']?>" method="post">
     <p>Enter new list name.</p>
     <input type="text" name="newListName" value="<?= $listName;?>">
     <input type="submit" value="Save">

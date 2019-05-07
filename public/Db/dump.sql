@@ -49,7 +49,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `ContactsManager`.`Contacts`
+-- Table `ContactsManager`.`Contact`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `ContactsManager`.`Contacts` ;
 

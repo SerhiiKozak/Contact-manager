@@ -51,4 +51,8 @@ class Session {
         $_SESSION = array();
         session_destroy();
     }
+
+    public static function clearValue($name) {
+        unset($_SESSION[$name]);
+    }
 }

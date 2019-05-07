@@ -1,7 +1,7 @@
 <?php
 
-require_once 'lib/Contact.php';
-require_once 'lib/Session.php';
+require_once ROOT_PATH . '/Library/Contact.php';
+require_once ROOT_PATH . '/Library/Session.php';
 
 $contact = new Contact();
 $fields = $contact->getFields();
@@ -31,13 +31,14 @@ if (!empty($id)) {
     <title>Add contact</title>
 </head>
 <body>
-<a href="logout.php">Logout</a>
+<a class="button" href="../index.php?path=logout">Logout</a>
 <?php if ($_GET['action'] == 'add') : ?>
-<form action="addContact.php" method="post">
+<form action="../index.php?path=addContact" method="post">
 <?php elseif ($_GET['action'] == 'edit') : ?>
-<form action="editContact.php" method="post">
+<form action="../index.php?path=editContact" method="post">
     <input type="hidden" name="contact_id" value="<?= $id?>">
 <?php endif; ?>
+    <?= $_GET['message']; ?>
     <table>
         <?php foreach($fields as $key => $value) : ?>
             <tr>
@@ -48,11 +49,11 @@ if (!empty($id)) {
         <tr>
             <td></td>
             <?php if ($_GET['action'] == 'add') : ?>
-            <td> <input type="submit" value="Create"></td>
+            <td> <input class="button" type="submit" value="Create"></td>
             <?php elseif ($_GET['action'] == 'edit') : ?>
-            <td> <input type="submit" value="Edit"></td>
+            <td> <input class="button" type="submit" value="Save"></td>
             <?php endif; ?>
-            <td> <a href="showContacts.php?list_id=<?= $_GET['id'];?>">Cancel</a> </td>
+            <td> <a class="button" href="../index.php?path=viewContacts&list_id=<?= $_GET['id'];?>">Cancel</a> </td>
         </tr>
     </table>
 </form>

@@ -1,12 +1,12 @@
 <?php
 
-require_once 'lib/Session.php';
-require_once 'lib/ListContacts.php';
+require_once ROOT_PATH . '/Library/Session.php';
+require_once ROOT_PATH . '/Library/ListContacts.php';
 
 $userData = Session::get('CONTACT_USER');
 $ls = new ListContacts();
 
-if(empty(Session::get('CONTACT_USER'))) {
+if (empty(Session::get('CONTACT_USER'))) {
   header('Location: index.php');
 }
 
@@ -20,9 +20,9 @@ $lists = $ls->getLists($userData['id']);
     <title>Lists</title>
 </head>
 <body>
-<a href="logout.php">Logout</a>
+<a href="../index.php?path=logout">Logout</a>
 <h2>Create new list</h2>
-<form action="addList.php" method="post">
+<form action="../index.php?path=addList" method="post">
     <table>
         <tr>
             <td>List name</td>
@@ -43,12 +43,12 @@ $lists = $ls->getLists($userData['id']);
         <?php if ($list['status'] == '1') :?>
         <tr>
             <td>
-                <a href="showContacts.php?list_id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
+                <a href="../index.php?path=viewContacts&list_id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
             </td>
             <td>
-                <a href="showList.php?id=<?= $list['id'] ?>">Edit</a>
+                <a href="../index.php?path=showList&id=<?= $list['id'] ?>">Edit</a>
                 </br>
-                <a href="deleteList.php?id=<?= $list['id'] ?>">Delete</a>
+                <a href="../index.php?path=deleteList&id=<?= $list['id'] ?>">Delete</a>
             </td>
         </tr>
         <?php endif; ?>
