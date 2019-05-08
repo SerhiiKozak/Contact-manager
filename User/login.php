@@ -1,8 +1,8 @@
 <?php
 
-require_once '/var/www/html/public/Library/Db.php';
-require_once '/var/www/html/public/Library/Session.php';
-require_once '/var/www/html/public/Library/User.php';
+require_once ROOT_PATH . '/Library/Db.php';
+require_once ROOT_PATH . '/Library/Session.php';
+require_once ROOT_PATH . '/Library/User.php';
 
 if ($_POST['login'] == '' || $_POST['password'] == '') {
   $message = 'Please enter login and password!';

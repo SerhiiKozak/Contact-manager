@@ -1,7 +1,7 @@
 <?php
 
-require_once '/var/www/html/public/Library/Session.php';
-require_once '/var/www/html/public/Library/User.php';
+require_once ROOT_PATH . '/Library/Session.php';
+require_once ROOT_PATH . '/Library/User.php';
 
 $session = new Session();
 $user = new User();

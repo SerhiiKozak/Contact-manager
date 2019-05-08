@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Library/Session.php';
+require_once ROOT_PATH . 'Library/Session.php';
 
 $data = (array)json_decode(base64_decode($_GET['hash']));
 
@@ -16,7 +16,7 @@ $data = (array)json_decode(base64_decode($_GET['hash']));
     <a href="../index.html">Back</a>
     <h1>Registration</h1>
     <?php echo !empty($_GET['message'])? $_GET['message'] : ""  ?>
-    <form class="inform" action="User/registration.php" method="post">
+    <form class="inform" action="../index.php?path=registrate" method="post">
       <table>
         <tr>
           <td>First Name</td>

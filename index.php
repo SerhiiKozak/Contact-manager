@@ -9,11 +9,17 @@ switch ($_GET['path']) {
     echo $_GET['message'];
     require_once ROOT_PATH . '/User/login.phtml';
     break;
+  case 'autentificate' :
+    require_once ROOT_PATH . '/User/login.php';
+    break;
   case 'logout' :
     require_once ROOT_PATH . '/User/logout.php';
     break;
   case 'registration' :
     require_once ROOT_PATH . '/User/registration.phtml';
+    break;
+  case  'registrate' :
+    require_once ROOT_PATH . '/User/registration.php';
     break;
   case 'viewLists' :
     require_once  ROOT_PATH . '/List/viewLists.phtml';
