@@ -1,10 +1,11 @@
 <?php
 
 require_once 'Db.php';
+require_once 'Person.php';
 
-class Contact extends Db {
+class Contact extends Person {
 
-    public $fields = [
+    protected $fields = [
         'user_id' => [
             'rule' => '/^[0-9]{1,9}$/',
             'value' => '',
@@ -121,14 +122,20 @@ class Contact extends Db {
         ]
     ];
 
-    /**
+    private $con = null;
+
+    public function __construct() {
+      $this->con = Db::getInstance()->getPDO();
+    }
+
+  /**
      * Fill $fields array from input form.
      **/
-    public function set() {
+    public function set($values) {
 
         foreach ($this->fields as $key => $value) {
           if (isset($this->fields[$key]['rule']) ) {
-            $this->fields[$key]['value'] = $_POST[$key];
+            $this->fields[$key]['value'] = $values[$key];
           }
         }
       if (empty($this->fields['create_at']['value'])) {
@@ -174,7 +181,7 @@ class Contact extends Db {
             $sql .= '`' . $key. '`=' . $this->con->quote($value['value']) . ',';
           }
           $sql = rtrim($sql,',');
-          $this->query($sql);
+          $this->con->query($sql);
         }
     }
 
@@ -183,7 +190,7 @@ class Contact extends Db {
      * Changes status of the contact to 0.
      **/
     public function deleteContact($id) {
-        $this->query("
+        $this->con->query("
                 UPDATE 
                   `Contacts` 
                 SET 
@@ -198,14 +205,14 @@ class Contact extends Db {
      * Modifies the entry in the database.
      **/
     public function editContact($id) {
-        $this->_set();
+        $this->set($_POST);
         $sql = 'UPDATE `Contacts` SET ';
         foreach ($this->fields as $key=>$value) {
             $sql .= '`' . $key . '`=' . $this->con->quote($value['value']). ',';
         }
         $sql = rtrim($sql, ',');
         $sql .= ' WHERE id=' . (int)$id;
-        $this->query($sql);
+        $this->con->query($sql);
     }
 
     /**
@@ -214,7 +221,7 @@ class Contact extends Db {
      * Return array of contacts.
      **/
     public function getContacts($id) {
-        $result = $this->query("
+        $result = $this->con->query("
             SELECT 
               * 
             FROM 
@@ -230,7 +237,7 @@ class Contact extends Db {
      * Return array of contact parameters.
      **/
     public function getContact($id) {
-        $result = $this->query("
+        $result = $this->con->query("
             SELECT 
               * 
             FROM 

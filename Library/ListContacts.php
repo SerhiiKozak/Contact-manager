@@ -109,7 +109,7 @@ class ListContacts extends Db {
         foreach ($lists as $key => $data) {
             if ($data['list_name'] == $name) {
                 return true;
-            } 
+            }
         }
     }
 }

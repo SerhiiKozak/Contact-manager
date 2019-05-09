@@ -13,4 +13,4 @@ $id = $_GET['id'];
 $list_id = $_GET['list_id'];
 
 $contact->deleteContact($id);
-header('Location: index.php?path=viewContacts&id=' . $list_id);
+header('Location: index.php?path=viewContacts&list_id=' . $list_id);

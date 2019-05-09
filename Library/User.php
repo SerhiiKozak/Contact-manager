@@ -1,27 +1,24 @@
 <?php
 
 require_once 'Db.php';
+require_once 'Person.php';
 require_once 'Session.php';
 
-class User extends Db {
+class User extends Person {
 
-  private $firstName;
-  private $lastName;
-  private $email;
-  private $password;
-  private $cpassword;
+  protected $fields = [
+    'first_name' => '',
+    'last_name' => '',
+    'email' => '',
+    'password' =>'',
+    'cpassword' => ''
+  ];
 
-  public function __construct() {
-    parent::__construct();
-    $this->set();
-  }
 
-  public function set() {
-    $this->firstName = $_POST['firstName'];
-    $this->lastName = $_POST['lastName'];
-    $this->email = $_POST['login'];
-    $this->password = $_POST['password'];
-    $this->cpassword = $_POST['cpassword'];
+  public function set($values) {
+    foreach ($this->fields as $key => $value) {
+      $this->fields[$key] = $values[$key];
+    };
   }
 
   /**
@@ -32,33 +29,33 @@ class User extends Db {
 
     $emailExp = '/^[a-zA-z0-9_-]+@[a-zA-Z]+\.[a-zA-z]{2,}$/';
 
-    if (trim($_POST['firstName']) == ''
-      || $_POST['lastName'] == ''
-      || $_POST['login'] == ''
+    if (trim($_POST['first_name']) == ''
+      || $_POST['last_name'] == ''
+      || $_POST['email'] == ''
       || $_POST['password'] == ''
       || $_POST['cpassword'] == '') {
 
       return  'Please fill in all fields!';
     }
 
-    if (!preg_match($emailExp, $_POST['login'])) {
+    if (!preg_match($emailExp, $_POST['email'])) {
       return 'Invalid email!';
     }
 
-    $result = $this->query("
+    $result = Db::getInstance()->query("
       SELECT 
          email 
       FROM 
          Users
       WHERE 
-         email = ".$this->quote($_POST['login'])
+         email = " . Db::getInstance()->quote($_POST['email'])
     )->fetchColumn();
 
     if ($result != false) {
       return 'User already exists!';
     }
 
-    if ($this->password != $this->cpassword) {
+    if ($this->fields['password'] != $this->fields['cpassword']) {
       return $message = 'Passwords do not match!';
     }
     return;
@@ -69,26 +66,27 @@ class User extends Db {
    * Create User and return user data.
    */
   public function createUser() {
+    $db = Db::getInstance();
     $editAt = $createAt = date('Y-m-d H:i:s');
-    $this->query("
+    $db->query("
             INSERT INTO 
               `Users`
             SET 
-              `first_name` = " . $this->quote($this->firstName) . " ,
-              `last_name` = " . $this->quote($this->lastName) . " ,
-              `email` = " . $this->quote($this->email) . " ,
-              `password` = " . $this->quote(password_hash($this->password, PASSWORD_BCRYPT)) . " ,
-              `create_at` = " . $this->quote($createAt) . " ,
-              `edit_at` = " . $this->quote($editAt) . " ,
+              `first_name` = " . $db->quote($this->fields['first_name']) . " ,
+              `last_name` = " . $db->quote($this->fields['last_name']) . " ,
+              `email` = " . $db->quote($this->fields['email']) . " ,
+              `password` = " . $db->quote(password_hash($this->fields['password'], PASSWORD_BCRYPT)) . " ,
+              `create_at` = " . $db->quote($createAt) . " ,
+              `edit_at` = " . $db->quote($editAt) . " ,
               `status` = 1"
     );
-    $userId = $this->getPDO()->lastInsertId();
+    $userId = $db->getPDO()->lastInsertId();
 
     return [
       'id' => $userId,
-      'fName' => $this->firstName,
-      'lName' => $this->lastName,
-      'email' => $this->email
+      'fName' => $this->fields['first_name'],
+      'lName' => $this->fields['last_name'],
+      'email' => $this->fields['email']
     ];
   }
 
@@ -96,11 +94,11 @@ class User extends Db {
    *
    */
   public function login() {
-    $result = $this-> query("SELECT * 
+    $result = Db::getInstance()-> query("SELECT * 
     FROM 
       Users 
     WHERE 
-      email = " . $this->quote($_POST['login'])
+      email = " . Db::getInstance()->quote($_POST['email'])
     )->fetch(PDO::FETCH_ASSOC);
 
     $userData = [
@@ -109,9 +107,9 @@ class User extends Db {
       'lName' => $result['last_name'],
       'email' => $result['email']];
 
-    if ($_POST['login'] != $result['email']|| !password_verify($_POST['password'], $result['password'])) {
+    if ($_POST['email'] != $result['email']|| !password_verify($_POST['password'], $result['password'])) {
       $message = 'Login or password incorrect!';
-      $data = ['login' => $_POST['login'], 'password' => $_POST['password']];
+      $data = ['email' => $_POST['email'], 'password' => $_POST['password']];
       $hash = base64_encode(json_encode($data));
       header('Location: ../index.php?path=login&hash=' . $hash . '&message=' . $message);
       exit;

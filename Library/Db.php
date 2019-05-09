@@ -7,6 +7,7 @@ class Db {
   private $userName;
   private $pass;
   protected $con;
+  static private $instance = null;
 
   public function __construct() {
     $this->hostName = 'localhost';
@@ -14,6 +15,13 @@ class Db {
     $this->userName = 'root';
     $this->pass     = '';
     $this->con      = $this->createConnect();
+  }
+
+  public static function getInstance() {
+    if (self::$instance == null) {
+      self::$instance = new self();
+    }
+    return self::$instance;
   }
 
   /**
