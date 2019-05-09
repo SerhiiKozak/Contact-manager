@@ -1,6 +1,6 @@
 <?php
 
-require_once '/var/www/html/public/Library/Session.php';
+require_once ROOT_PATH . '/Library/Session.php';
 
 Session::destroy();
 if (empty(Session::get('CONTACT_USER'))) {

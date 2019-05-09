@@ -55,7 +55,7 @@ class User extends Db {
     )->fetchColumn();
 
     if ($result != false) {
-    return 'User already exists!';
+      return 'User already exists!';
     }
 
     if ($this->password != $this->cpassword) {

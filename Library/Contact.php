@@ -145,7 +145,7 @@ class Contact extends Db {
       foreach ($this->fields as $key => $value) {
         if (isset($this->fields[$key]['rule']) && isset($this->fields[$key]['message'])) {
           if (empty($_POST[$key]) || !preg_match($this->fields[$key]['rule'], $_POST[$key])) {
-            require_once '/var/www/html/public/Exceptions/ValidateExceptions.php';
+            require_once ROOT_PATH . '/Exceptions/ValidateExceptions.php';
             throw new ValidateExceptions($this->fields[$key]['message']);
           }
         }

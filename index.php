@@ -4,9 +4,9 @@ require_once ROOT_PATH . '/Library/Session.php';
 
 $userData = Session::get('CONTACT_USER');
 
+//if (!empty($userData)) {
 switch ($_GET['path']) {
   case 'login' :
-    echo $_GET['message'];
     require_once ROOT_PATH . '/User/login.phtml';
     break;
   case 'autentificate' :
@@ -22,7 +22,7 @@ switch ($_GET['path']) {
     require_once ROOT_PATH . '/User/registration.php';
     break;
   case 'viewLists' :
-    require_once  ROOT_PATH . '/List/viewLists.phtml';
+    require_once ROOT_PATH . '/List/viewLists.phtml';
     break;
   case 'showList' :
     require_once ROOT_PATH . '/List/viewList.phtml';
@@ -53,14 +53,5 @@ switch ($_GET['path']) {
     break;
   default :
     require_once 'index.html';
+
 }
-
-
-
-/*if ( !isset($userData) || empty($userData)) {
-    echo $_GET['message'];
-    require_once 'login.html';
-} else {
-    echo $_GET['message'];
-    require_once 'List/viewLists.phtml';
-}*/

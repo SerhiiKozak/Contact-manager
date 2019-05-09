@@ -15,5 +15,5 @@ if (!$ls->listExist($name)) {
   $ls ->editList($listId, $name);
   header('Location: index.php?path=viewLists');
 } else {
-  header('Location: index.php?path=editList&message=List with this name already exist');
+  header('Location: index.php?path=editList&message='.urlencode( 'with this name already exist'));
 }

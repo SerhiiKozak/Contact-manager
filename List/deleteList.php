@@ -13,4 +13,4 @@ $id = $_GET['id'];
 
 $ls->deleteList($id);
 $message = 'List have been deleted.';
-header('Location: index.php?path=viewLists&message=' . $message);
+header('Location: index.php?path=viewLists&message=' . urlencode($message));
