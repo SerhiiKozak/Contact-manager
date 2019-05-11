@@ -15,7 +15,7 @@ if (!empty($message)) {
 }
 
 $userData = $user->createUser();
-Session::set('CONTACT_USER', $userData);
+Session::getInstance()->set('CONTACT_USER', $userData);
 header('Location: ../index.php?path=viewLists');
 
 

@@ -3,16 +3,17 @@
 require_once ROOT_PATH . '/Library/Session.php';
 require_once ROOT_PATH . '/Library/Contact.php';
 
+$session = Session::getInstance();
 $cnt = new Contact();
 $id = $_GET['list_id'];
 $contacts = $cnt->getContacts($id);
 $fields = $cnt->getFields();
 
-if (empty(Session::get('CONTACT_USER'))) {
+if (empty($session->get('CONTACT_USER'))) {
     header('Location: index.php');
 }
-if (!empty(Session::get('fields'))) {
-  Session::clearValue('fields');
+if (!empty($session->get('fields'))) {
+  $session->clearValue('fields');
 }
 ?>
 

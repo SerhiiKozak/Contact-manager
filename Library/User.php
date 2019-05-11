@@ -114,7 +114,7 @@ class User extends Person {
       header('Location: ../index.php?path=login&hash=' . $hash . '&message=' . $message);
       exit;
     }
-    $session = new Session();
+    $session = Session::getInstance();
     $session->set('CONTACT_USER', $userData);
     header('Location: ../index.php?path=viewLists');
   }

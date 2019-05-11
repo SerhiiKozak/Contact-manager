@@ -2,7 +2,7 @@
 
 require_once ROOT_PATH . '/Library/Session.php';
 
-if(empty(Session::get('CONTACT_USER'))) {
+if(empty(Session::getInstance()->get('CONTACT_USER'))) {
   header('Location: index.php');
 }
 

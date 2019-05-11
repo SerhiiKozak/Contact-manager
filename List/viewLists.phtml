@@ -3,10 +3,10 @@
 require_once ROOT_PATH . '/Library/Session.php';
 require_once ROOT_PATH . '/Library/ListContacts.php';
 
-$userData = Session::get('CONTACT_USER');
+$userData = Session::getInstance()->get('CONTACT_USER');
 $ls = new ListContacts();
 
-if (empty(Session::get('CONTACT_USER'))) {
+if (empty(Session::getInstance()->get('CONTACT_USER'))) {
   header('Location: index.php');
 }
 

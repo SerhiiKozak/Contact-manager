@@ -2,7 +2,7 @@
 define('ROOT_PATH', __DIR__);
 require_once ROOT_PATH . '/Library/Session.php';
 
-$userData = Session::get('CONTACT_USER');
+$userData = Session::getInstance()->get('CONTACT_USER');
 
 //if (!empty($userData)) {
 switch ($_GET['path']) {

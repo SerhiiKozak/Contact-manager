@@ -5,7 +5,7 @@ require_once ROOT_PATH . '/Library/Session.php';
 
 $contact = new Contact();
 $fields = $contact->getFields();
-$user = Session::get('CONTACT_USER');
+$user = Session::getInstance()->get('CONTACT_USER');
 $id = $_GET['contact_id'];
 
 if (!empty($id)) {
@@ -16,7 +16,7 @@ if (!empty($id)) {
 } else {
   $fields['user_id']['value'] = $user['id'];
   $fields['list_id']['value'] = $_GET['id'];
-  $result = Session::get('fields');
+  $result = Session::getInstance()->get('fields');
   foreach ($fields as $key => $value) {
       if (!empty($result)){
         $fields[$key]['value'] = $result[$key];

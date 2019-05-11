@@ -3,17 +3,29 @@
 class Session {
 
     public static $session_start = false;
+    static private $instance = null;
 
-    /**
+    public function __construct() {
+      session_start();
+    }
+
+  /**
+   * @return Session
+   * Return instance of Object.     
+   */
+    public static function getInstance() {
+      if (self::$instance == null) {
+        self::$instance = new self();
+      }
+      return self::$instance;
+    }
+
+  /**
      * @param String $key
      * @param $value
      * Create Session parameter.
      **/
     public static function set($key, $value) {
-        if (!self::$session_start) {
-            session_start();
-            self::$session_start = session_start();
-        }
         if (isset($_SESSION[$key]) || !empty($_SESSION[$key])) {
             $_SESSION[$key] .= $value;
         } else {
@@ -27,11 +39,6 @@ class Session {
      * Return SESSION parameter by the Key.
      **/
     public static function get($key) {
-        if (!self::$session_start) {
-            session_start();
-            self::$session_start = session_start();
-        }
-
         if (isset($_SESSION[$key])) {
             return $_SESSION[$key];
         } else {
@@ -43,10 +50,6 @@ class Session {
      * Clear array of SESSION parameters and destroy Session.
      **/
     public static function destroy() {
-        if (!self::$session_start) {
-            session_start();
-            self::$session_start = session_start();
-        }
         session_unset();
         $_SESSION = array();
         session_destroy();

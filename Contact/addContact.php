@@ -2,8 +2,8 @@
 
 require_once ROOT_PATH . '/Library/Session.php';
 
-
-if (empty(Session::get('CONTACT_USER'))) {
+$session = Session::getInstance();
+if (empty($session->get('CONTACT_USER'))) {
   header('Location: index.php');
 }
 
@@ -14,9 +14,12 @@ $contact->set($_POST);
 try {
   $contact->validate();
   $contact->createContact();
-  Session::clearValue('fields');
+  $session->clearValue('fields');
   header('Location: index.php?path=viewContacts&list_id=' . $id);
 } catch (ValidateExceptions $e) {
-  Session::set('fields', $contact->getValues());
+  if (!empty(Session::getInstance()->get('fields'))) {
+    Session::getInstance()->clearValue('fields');
+  }
+  $session->set('fields', $contact->getValues());
   header('Location: index.php?path=createForm&action=add&id=' . $id . '&message=' . $e->getMessage());
 }
