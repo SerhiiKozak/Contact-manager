@@ -31,7 +31,7 @@ if (!empty($session->get('fields'))) {
         <tr>
            <?php foreach ($fields as $key => $value) : ?>
               <?php if (!empty($value['name'])) : ?>
-                 <td><?=$value['name']?></td>
+                 <td><?= $value['name']?></td>
               <?php endif; ?>
            <?php endforeach; ?>
            <td>Action</td>

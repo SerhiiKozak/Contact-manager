@@ -2,7 +2,6 @@
 
 class Session {
 
-    public static $session_start = false;
     static private $instance = null;
 
     public function __construct() {
@@ -11,7 +10,7 @@ class Session {
 
   /**
    * @return Session
-   * Return instance of Object.     
+   * Return instance of Object.
    */
     public static function getInstance() {
       if (self::$instance == null) {
@@ -55,6 +54,10 @@ class Session {
         session_destroy();
     }
 
+  /**
+   * @param $name
+   * Remove value from $_SESSION.
+   */
     public static function clearValue($name) {
         unset($_SESSION[$name]);
     }

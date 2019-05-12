@@ -4,7 +4,6 @@ require_once ROOT_PATH . '/Library/Session.php';
 
 $userData = Session::getInstance()->get('CONTACT_USER');
 
-//if (!empty($userData)) {
 switch ($_GET['path']) {
   case 'login' :
     require_once ROOT_PATH . '/User/login.phtml';
@@ -53,5 +52,4 @@ switch ($_GET['path']) {
     break;
   default :
     require_once 'index.html';
-
 }

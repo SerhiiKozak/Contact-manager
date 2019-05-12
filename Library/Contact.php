@@ -19,14 +19,14 @@ class Contact extends Person {
             'type' => 'hidden'
         ],
         'first_name' => [
-            'rule' => '/^[a-zA-Z]+/',
+            'rule' => '/^[а-яА-Яa-zA-Z]+/',
             'value' => '',
             'message' => 'First name field empty or incorrect',
             'name' => 'First Name',
             'type' => 'text'
         ],
         'last_name' => [
-            'rule' => '/^[a-zA-Z]+/',
+            'rule' => '/^[а-яА-Яa-zA-Z]+/',
             'value' => '',
             'message' => 'Last name field empty or incorrect',
             'name' => 'Last Name',
@@ -62,28 +62,28 @@ class Contact extends Person {
             'type' => 'text'
         ],
         'first_adress' => [
-            'rule' => '/^[a-zA-Z]+/',
+            'rule' => '/^[а-яА-Яa-zA-Z]+/',
             'value' => '',
             'message' => 'First Address field empty or incorrect',
             'name' => 'First Address',
             'type' => 'text'
         ],
         'second_adress' => [
-            'rule' => '/^[a-zA-Z]+/',
+            'rule' => '/^[а-яА-Яa-zA-Z]+/',
             'value' => '',
             'message' => 'Second Address field empty or incorrect',
             'name' => 'Second Address',
             'type' => 'text'
         ],
         'city' => [
-            'rule' => '/^[a-zA-Z]+/',
+            'rule' => '/^[а-яА-Яa-zA-Z]+/',
             'value' => '',
             'message' => 'City field empty or incorrect',
             'name' => 'City',
             'type' => 'text'
         ],
         'state' => [
-            'rule' => '/^[a-zA-Z]+/',
+            'rule' => '/^[а-яА-Яa-zA-Z]+/',
             'value' => '',
             'message' => 'State field empty or incorrect',
             'name' => 'State',
@@ -97,7 +97,7 @@ class Contact extends Person {
             'type' => 'text'
         ],
         'country' => [
-            'rule' => '/^[a-zA-Z]+/',
+            'rule' => '/^[а-яА-Яa-zA-Z]+/',
             'value' => '',
             'message' => 'Country field empty or incorrect',
             'name' => 'Country',
