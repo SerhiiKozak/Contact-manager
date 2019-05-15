@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Edit list</title>
+</head>
+<body>
+<a class="link-back" href="../../index.php?path=viewLists">Back</a>
+<a class="link-logout" href="../../index.php?path=logout">Logout</a>
+<form action="../../index.php?path=editList&id=<?= $_GET['id']?>" method="post">
+    <p>Enter new list name.</p>
+    <input type="text" name="newListName" value="<?= $listName;?>">
+    <input class="button" type="submit" value="Save">
+</form>
+</body>
+</html>

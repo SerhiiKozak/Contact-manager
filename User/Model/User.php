@@ -1,8 +1,7 @@
 <?php
 
-require_once 'Db.php';
-require_once 'Person.php';
-require_once 'Session.php';
+require_once ROOT_PATH . '/Library/Db.php';
+require_once ROOT_PATH . '/Library/Person.php';
 
 class User extends Person {
 
@@ -56,9 +55,9 @@ class User extends Person {
     }
 
     if ($this->fields['password'] != $this->fields['cpassword']) {
-      return $message = 'Passwords do not match!';
+      return 'Passwords do not match!';
     }
-    return;
+    return '';
   }
 
   /**
@@ -94,7 +93,9 @@ class User extends Person {
    *
    */
   public function login() {
-    $result = Db::getInstance()-> query("SELECT * 
+    $result = Db::getInstance()-> query("
+    SELECT 
+        * 
     FROM 
       Users 
     WHERE 
@@ -108,14 +109,10 @@ class User extends Person {
       'email' => $result['email']];
 
     if ($_POST['email'] != $result['email']|| !password_verify($_POST['password'], $result['password'])) {
-      $message = 'Login or password incorrect!';
-      $data = ['email' => $_POST['email'], 'password' => $_POST['password']];
-      $hash = base64_encode(json_encode($data));
-      header('Location: ../index.php?path=login&hash=' . $hash . '&message=' . $message);
-      exit;
+      return false;
+    } else {
+      return $userData;
     }
-    $session = Session::getInstance();
-    $session->set('CONTACT_USER', $userData);
-    header('Location: ../index.php?path=viewLists');
   }
 }
+// TODO group file for MVC model

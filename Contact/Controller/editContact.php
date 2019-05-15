@@ -6,7 +6,7 @@ if(empty(Session::getInstance()->get('CONTACT_USER'))) {
   header('Location: index.php');
 }
 
-require_once ROOT_PATH . '/Library/Contact.php';
+require_once ROOT_PATH . '/Contact/Model/Contact.php';
 
 $contactId = $_POST['contact_id'];
 $id = $_POST['list_id'];

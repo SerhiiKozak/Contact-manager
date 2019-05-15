@@ -1,7 +1,7 @@
 <?php
 
-require_once 'Db.php';
-require_once 'Person.php';
+require_once ROOT_PATH . '/Library/Db.php';
+require_once ROOT_PATH . '/Library/Person.php';
 
 class Contact extends Person {
 
@@ -19,14 +19,14 @@ class Contact extends Person {
             'type' => 'hidden'
         ],
         'first_name' => [
-            'rule' => '/^[а-яА-Яa-zA-Z]+/',
+            'rule' => '/^(?!\s*$).+/',
             'value' => '',
             'message' => 'First name field empty or incorrect',
             'name' => 'First Name',
             'type' => 'text'
         ],
         'last_name' => [
-            'rule' => '/^[а-яА-Яa-zA-Z]+/',
+            'rule' => '/^(?!\s*$).+/',
             'value' => '',
             'message' => 'Last name field empty or incorrect',
             'name' => 'Last Name',
@@ -43,47 +43,47 @@ class Contact extends Person {
         'home' => [
             'rule' => '/^[0-9]{6}$/',
             'value' => '',
-            'message' => 'Home field empty or incorrect',
+            'message' => 'Home field empty or incorrect. Example: 111111.',
             'name' => 'Home',
             'type' => 'text'
         ],
         'work' => [
             'rule' => '/^[0-9]{6}$/',
             'value' => '',
-            'message' => 'Work field empty or incorrect',
+            'message' => 'Work field empty or incorrect. Example: 111111.',
             'name' => 'Work',
             'type' => 'text'
         ],
         'cell' => [
             'rule' => '/^(\(?[0-9]{3}\)?([ -]?)([0-9]{3})([ -]?)([0-9]{4}))$/',
             'value' => '',
-            'message' => 'Cell field empty or incorrect',
+            'message' => 'Cell field empty or incorrect. Example: 096 000 0000 or 096-000-0000.',
             'name' => 'Cell',
             'type' => 'text'
         ],
         'first_adress' => [
-            'rule' => '/^[а-яА-Яa-zA-Z]+/',
+            'rule' => '/^(?!\s*$).+/',
             'value' => '',
             'message' => 'First Address field empty or incorrect',
             'name' => 'First Address',
             'type' => 'text'
         ],
         'second_adress' => [
-            'rule' => '/^[а-яА-Яa-zA-Z]+/',
+            'rule' => '/^(?!\s*$).+/',
             'value' => '',
             'message' => 'Second Address field empty or incorrect',
             'name' => 'Second Address',
             'type' => 'text'
         ],
         'city' => [
-            'rule' => '/^[а-яА-Яa-zA-Z]+/',
+            'rule' => '/^(?!\s*$).+/',
             'value' => '',
             'message' => 'City field empty or incorrect',
             'name' => 'City',
             'type' => 'text'
         ],
         'state' => [
-            'rule' => '/^[а-яА-Яa-zA-Z]+/',
+            'rule' => '/^(?!\s*$).+/',
             'value' => '',
             'message' => 'State field empty or incorrect',
             'name' => 'State',
@@ -92,12 +92,12 @@ class Contact extends Person {
         'zip' => [
             'rule' => '/^[0-9]{5}/',
             'value' => '',
-            'message' => 'Zip field empty or incorrect',
+            'message' => 'Zip field empty or incorrect. Example: 26111.',
             'name' => 'Zip',
             'type' => 'text'
         ],
         'country' => [
-            'rule' => '/^[а-яА-Яa-zA-Z]+/',
+            'rule' => '/^(?!\s*$).+/',
             'value' => '',
             'message' => 'Country field empty or incorrect',
             'name' => 'Country',

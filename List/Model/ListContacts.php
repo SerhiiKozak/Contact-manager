@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Db.php';
+require_once ROOT_PATH . '/Library/Db.php';
 
 class ListContacts extends Db {
 
@@ -107,7 +107,7 @@ class ListContacts extends Db {
     public function listExist($name) {
         $lists = $this->getLists($this->userId);
         foreach ($lists as $key => $data) {
-            if ($data['list_name'] == $name) {
+            if ($data['list_name'] == $name && $data['status'] == 0) {
                 return true;
             }
         }

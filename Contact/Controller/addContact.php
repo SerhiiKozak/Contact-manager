@@ -7,7 +7,7 @@ if (empty($session->get('CONTACT_USER'))) {
   header('Location: index.php');
 }
 
-require_once ROOT_PATH . '/Library/Contact.php';
+require_once ROOT_PATH . '/Contact/Model/Contact.php';
 $contact = new Contact();
 $id = $_POST['list_id'];
 $contact->set($_POST);

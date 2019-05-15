@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <a class="link-registration" href="../../index.php?path=registration">Registration</a>
+    <form class="inform" action="../../index.php?path=autentificate" method="post">
+        <h1>Login</h1>
+        <?= $_GET['message']; ?>
+        <table class="form-table">
+            <tr>
+                <td>Login</td>
+                <td> <input type="text" name="email" value="<?= $data['email']; ?>"> </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td> <input type="password" name="password" value="<?= $data['password']; ?>"> </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td> <input class="button" type="submit" name="logbutton" value="Sing In"> </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+

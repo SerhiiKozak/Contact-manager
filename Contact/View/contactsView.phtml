@@ -1,41 +1,25 @@
-<?php
-
-require_once ROOT_PATH . '/Library/Session.php';
-require_once ROOT_PATH . '/Library/Contact.php';
-
-$session = Session::getInstance();
-$cnt = new Contact();
-$id = $_GET['list_id'];
-$contacts = $cnt->getContacts($id);
-$fields = $cnt->getFields();
-
-if (empty($session->get('CONTACT_USER'))) {
-    header('Location: index.php');
-}
-if (!empty($session->get('fields'))) {
-  $session->clearValue('fields');
-}
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>Contacts</title>
 </head>
+<nav class="button-panel">
+    <a class="link-back" href="../../index.php?path=viewLists">Back</a>
+    <a class="link-add" href="../../index.php?path=createForm&action=add&id=<?= $_GET['list_id'] ?>">Add</a>
+    <a class="link-logout" href="../../index.php?path=logout">Logout</a>
+</nav>
 <body>
-    <a href="../index.php?path=viewLists">Back</a>
-    <a href="../index.php?path=createForm&action=add&id=<?= $id ?>">Add</a>
-    <a href="../index.php?path=logout">Logout</a>
+
     <table>
-        <tr>
+        <thead>
            <?php foreach ($fields as $key => $value) : ?>
               <?php if (!empty($value['name'])) : ?>
                  <td><?= $value['name']?></td>
               <?php endif; ?>
            <?php endforeach; ?>
            <td>Action</td>
-        </tr>
+        </thead>
         <?php foreach ($contacts as $key => $contact) : ?>
            <?php if ($contact['status'] == '1') : ?>
               <tr>
@@ -45,9 +29,8 @@ if (!empty($session->get('fields'))) {
                     <?php endif; ?>
                  <?php endforeach; ?>
                  <td>
-                    <a href="../index.php?path=createForm&action=edit&contact_id=<?= $contact['id']?>&id=<?= $id?>">Edit</a>
-                    </br>
-                    <a href="../index.php?path=deleteContact&id=<?= $contact['id']?>&list_id=<?= $id;?>">Delete</a>
+                    <a class="link" href="../../index.php?path=createForm&action=edit&contact_id=<?= $contact['id']?>&id=<?= $_GET['list_id']?>">Edit</a>
+                    <a class="link" href="../../index.php?path=deleteContact&id=<?= $contact['id']?>&list_id=<?= $_GET['list_id']   ;?>">Delete</a>
                  </td>
               </tr>
            <?php endif; ?>

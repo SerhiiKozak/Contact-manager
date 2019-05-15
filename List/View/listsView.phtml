@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lists</title>
+</head>
+<body>
+<a class="link-logout" href="../../index.php?path=logout">Logout</a>
+<h2>Create new list</h2>
+<?= $_GET['message']?>
+<form action="../../index.php?path=addList" method="post">
+    <h4>List name</h4>
+    <input type="text" name="listName" >
+    <input class="button" name="submit" type="submit" value="Create">
+</form>
+<table class="lists-table">
+    <tr>
+        <td>List name</td>
+        <td>Action</td>
+    </tr>
+    <?php foreach ($lists as $key => $list) :?>
+        <?php if ($list['status'] == '1') :?>
+        <tr>
+            <td>
+                <a href="../../index.php?path=viewContacts&list_id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
+            </td>
+            <td>
+                <a class="link" href="../../index.php?path=showList&id=<?= $list['id'] ?>">Edit</a>
+                <a class="link" href="../../index.php?path=deleteList&id=<?= $list['id'] ?>">Delete</a>
+            </td>
+        </tr>
+        <?php endif; ?>
+     <?php endforeach; ?>
+</<table>
