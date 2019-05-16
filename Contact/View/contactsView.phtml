@@ -5,8 +5,8 @@
     <title>Contacts</title>
 </head>
 <nav class="button-panel">
-    <a class="link-back" href="../../index.php?path=viewLists">Back</a>
-    <a class="link-add" href="../../index.php?path=createForm&action=add&id=<?= $_GET['list_id'] ?>">Add</a>
+    <a class="link-back" href="../../index.php?path=ListsController">Back</a>
+    <a class="link-add" href="../../index.php?path=ContactController&action=add&id=<?= $_GET['list_id'] ?>">Add</a>
     <a class="link-logout" href="../../index.php?path=logout">Logout</a>
 </nav>
 <body>
@@ -29,7 +29,7 @@
                     <?php endif; ?>
                  <?php endforeach; ?>
                  <td>
-                    <a class="link" href="../../index.php?path=createForm&action=edit&contact_id=<?= $contact['id']?>&id=<?= $_GET['list_id']?>">Edit</a>
+                    <a class="link" href="../../index.php?path=ContactController&action=edit&contact_id=<?= $contact['id']?>&id=<?= $_GET['list_id']?>">Edit</a>
                     <a class="link" href="../../index.php?path=deleteContact&id=<?= $contact['id']?>&list_id=<?= $_GET['list_id']   ;?>">Delete</a>
                  </td>
               </tr>

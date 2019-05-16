@@ -8,7 +8,7 @@ if ($_POST['email'] == '' || $_POST['password'] == '') {
   $message = urlencode('Please enter login and password!');
   $data = ['email' => $_POST['email'], 'password' => $_POST['password']];
   $hash = base64_encode(json_encode($data));
-  header('Location: index.php?&path=login&hash=' . $hash . '&message=' . $message);
+  header('Location: index.php?&path=LoginController&hash=' . $hash . '&message=' . $message);
   exit;
 }
 
@@ -18,9 +18,9 @@ if ($result == false) {
   $message = 'Login or password incorrect!';
   $data = ['email' => $_POST['email'], 'password' => $_POST['password']];
   $hash = base64_encode(json_encode($data));
-  header('Location: index.php?path=login&hash=' . $hash . '&message=' . $message);
+  header('Location: index.php?path=LoginController&hash=' . $hash . '&message=' . $message);
 } else {
   $session = Session::getInstance();
   $session->set('CONTACT_USER', $result);
-  header('Location: index.php?path=viewLists');
+  header('Location: index.php?path=ListsController');
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once ROOT_PATH . '/Library/ListContacts.php';
+require_once ROOT_PATH . '/List/Model/ListContacts.php';
 require_once ROOT_PATH . '/Library/Session.php';
 
 if (empty(Session::getInstance()->get('CONTACT_USER'))) {
@@ -13,7 +13,7 @@ $ls = new ListContacts();
 
 if (!$ls->listExist($name)) {
   $ls ->editList($listId, $name);
-  header('Location: index.php?path=viewLists');
+  header('Location: index.php?path=ListsController');
 } else {
-  header('Location: index.php?path=editList&message='.urlencode( 'with this name already exist'));
+  header('Location: index.php?path=ListController&message='.urlencode( 'with this name already exist'));
 }

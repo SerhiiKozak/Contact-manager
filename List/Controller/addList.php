@@ -15,11 +15,11 @@ if (!empty($listName)) {
     $ls->createList();
   } else {
     $message = 'List with this name already exist!';
-    header('Location: index.php?path=viewLists&message=' . $message);
+    header('Location: index.php?path=ListsController&message=' . $message);
   }
 } else {
   $message = 'Enter list name!';
-  header('Location: index.php?path=viewLists&message=' . $message);
+  header('Location: index.php?path=ListsController&message=' . $message);
 }
 
-header('Location: index.php?path=viewLists');
+header('Location: index.php?path=ListsController    ');

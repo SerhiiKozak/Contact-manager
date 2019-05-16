@@ -1,51 +1,51 @@
 <?php
 define('ROOT_PATH', __DIR__);
-
-switch ($_GET['path']) {
-  case 'login' :
-    require_once ROOT_PATH . '/User/Controller/LoginController.php';
+$path = $_GET['path'];
+switch ($path) {
+  case 'LoginController' :
+    require_once ROOT_PATH . '/User/Controller/' . $path . '.php';
     break;
-  case 'autentificate' :
-    require_once ROOT_PATH . '/User/Controller/login.php';
+  case 'login' :
+    require_once ROOT_PATH . '/User/Controller/' . $path . '.php';
     break;
   case 'logout' :
-    require_once ROOT_PATH . '/User/Controller/logout.php';
+    require_once ROOT_PATH . '/User/Controller/' . $path . '.php';
     break;
-  case 'registration' :
-    require_once ROOT_PATH . '/User/Controller/RegistrationController.php';
+  case 'RegistrationController' :
+    require_once ROOT_PATH . '/User/Controller/' . $path . '.php';
     break;
-  case  'registrate' :
-    require_once ROOT_PATH . '/User/Controller/registration.php';
+  case  'registration' :
+    require_once ROOT_PATH . '/User/Controller/' . $path . '.php';
     break;
-  case 'viewLists' :
-    require_once ROOT_PATH . '/List/Controller/ListsController.php';
+  case 'ListsController' :
+    require_once ROOT_PATH . '/List/Controller/' . $path . '.php';
     break;
-  case 'showList' :
-    require_once ROOT_PATH . '/List/Controller/ListController.php';
+  case 'ListController' :
+    require_once ROOT_PATH . '/List/Controller/' . $path . '.php';
     break;
   case 'editList' :
-    require_once ROOT_PATH . '/List/Controller/editList.php';
+    require_once ROOT_PATH . '/List/Controller/' . $path . '.php';
     break;
   case 'addList' :
-    require_once ROOT_PATH . '/List/Controller/addList.php';
+    require_once ROOT_PATH . '/List/Controller/' . $path . '.php';
     break;
   case 'deleteList' :
-    require_once ROOT_PATH . '/List/Controller/deleteList.php';
+    require_once ROOT_PATH . '/List/Controller/' . $path . '.php';
     break;
-  case 'viewContacts' :
-    require_once ROOT_PATH . '/Contact/Controller/ContactsController.php';
+  case 'ContactsController' :
+    require_once ROOT_PATH . '/Contact/Controller/' . $path . '.php';
     break;
-  case 'createForm' :
-    require_once ROOT_PATH . '/Contact/Controller/ContactController.php';
+  case 'ContactController' :
+    require_once ROOT_PATH . '/Contact/Controller/' . $path . '.php';
     break;
   case 'addContact' :
-    require_once ROOT_PATH . '/Contact/Controller/addContact.php';
+    require_once ROOT_PATH . '/Contact/Controller/' . $path . '.php';
     break;
   case 'editContact' :
-    require_once ROOT_PATH . '/Contact/Controller/editContact.php';
+    require_once ROOT_PATH . '/Contact/Controller/' . $path . '.php';
     break;
   case 'deleteContact' :
-    require_once ROOT_PATH . '/Contact/Controller/deleteContact.php';
+    require_once ROOT_PATH . '/Contact/Controller/' . $path . '.php';
     break;
   default :
     require_once 'main.html';

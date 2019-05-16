@@ -14,7 +14,7 @@ try {
   $contact = new Contact();
   $contact->validate();
   $contact->editContact($contactId);
-  header('Location: index.php?path=viewContacts&list_id=' . $id);
+  header('Location: index.php?path=ContactsController&list_id=' . $id);
 } catch (ValidateExceptions $e) {
-  header('Location: index.php?path=createForm&action=edit&contact_id=' . $contactId . '&id=' . $id . '& message=' . $e->getMessage());
+  header('Location: index.php?path=ContactController&action=edit&contact_id=' . $contactId . '&id=' . $id . '& message=' . $e->getMessage());
 }

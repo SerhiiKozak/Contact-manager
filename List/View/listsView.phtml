@@ -22,10 +22,10 @@
         <?php if ($list['status'] == '1') :?>
         <tr>
             <td>
-                <a href="../../index.php?path=viewContacts&list_id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
+                <a href="../../index.php?path=ContactsController&list_id=<?= $list['id'] ?>"><?= $list['list_name']; ?></a>
             </td>
             <td>
-                <a class="link" href="../../index.php?path=showList&id=<?= $list['id'] ?>">Edit</a>
+                <a class="link" href="../../index.php?path=ListController&id=<?= $list['id'] ?>">Edit</a>
                 <a class="link" href="../../index.php?path=deleteList&id=<?= $list['id'] ?>">Delete</a>
             </td>
         </tr>
