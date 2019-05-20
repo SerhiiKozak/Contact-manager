@@ -2,12 +2,18 @@
 <html lang="en" dir="ltr">
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
+<header>
+    <h2>Contact Manager</h2>
+    <div class="menu">
+        <a class="link-registration" href="../../index.php?path=RegistrationController">Registration</a>
+    </div>
+</header>
 <body>
-    <a class="link-registration" href="../../index.php?path=RegistrationController">Registration</a>
     <form class="inform" action="../../index.php?controller=LoginController&action=login" method="post">
         <h1>Login</h1>
-        <?= $_GET['message']; ?>
+        <div class="message"><?= $_GET['message']; ?></div>
         <table class="form-table">
             <tr>
                 <td>Login</td>

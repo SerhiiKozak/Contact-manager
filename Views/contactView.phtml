@@ -12,7 +12,7 @@
 <form action="../../index.php?controller=ContactController&action=edit" method="post">
     <input type="hidden" name="contact_id" value="<?= $_GET['contact_id'] ?>">
 <?php endif; ?>
-    <?= $_GET['message']; ?>
+    <div class="message"><?= $_GET['message']; ?></div>>
     <table>
         <?php foreach($fields as $key => $value) : ?>
             <tr>

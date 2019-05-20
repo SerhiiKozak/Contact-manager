@@ -7,7 +7,7 @@
 <body>
 <a class="link-logout" href="../../index.php?controller=LogoutController&action=logout">Logout</a>
 <h2>Create new list</h2>
-<?= $_GET['message']?>
+<div class="message"><?= $_GET['message']?></div>>
 <form action="../../index.php?controller=ListController&action=add" method="post">
     <h4>List name</h4>
     <input type="text" name="listName" >

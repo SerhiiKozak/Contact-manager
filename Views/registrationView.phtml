@@ -3,12 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>Registration</title>
+      <link rel="stylesheet" href="/css/main.css">
   </head>
+  <header>
+      <h2>Contact Manager</h2>
+      <div class="menu">
+          <a class="link-back" href="../../index.php">Back</a>
+      </div>
+  </header>
   <body>
-    <a class="link-back" href="../../index.php">Back</a>
+
     <form class="inform" action="../../index.php?controller=RegistrationController&action=registrate    " method="post">
         <h1>Registration</h1>
-        <?php echo !empty($_GET['message'])? $_GET['message'] : ""  ?>
+        <div class="message"><?php echo !empty($_GET['message'])? $_GET['message'] : ""  ?></div>
           <table class="form-table">
             <tr>
               <td>First Name</td>
