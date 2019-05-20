@@ -5,11 +5,11 @@
     <title>Add contact</title>
 </head>
 <body>
-<a class="link-logout" href="../../index.php?path=logout">Logout</a>
-<?php if ($_GET['action'] == 'add') : ?>
-<form action="../../index.php?path=addContact" method="post">
-<?php elseif ($_GET['action'] == 'edit') : ?>
-<form action="../../index.php?path=editContact" method="post">
+<a class="link-logout" href="../../index.php?controller=LogoutController&action=logout">Logout</a>
+<?php if ($_GET['view'] == 'add') : ?>
+<form action="../../index.php?controller=ContactController&action=add" method="post">
+<?php elseif ($_GET['view'] == 'edit') : ?>
+<form action="../../index.php?controller=ContactController&action=edit" method="post">
     <input type="hidden" name="contact_id" value="<?= $_GET['contact_id'] ?>">
 <?php endif; ?>
     <?= $_GET['message']; ?>
@@ -22,12 +22,12 @@
         <?php endforeach;?>
         <tr>
             <td></td>
-            <?php if ($_GET['action'] == 'add') : ?>
+            <?php if ($_GET['view'] == 'add') : ?>
             <td> <input class="button" type="submit" value="Create"></td>
-            <?php elseif ($_GET['action'] == 'edit') : ?>
+            <?php elseif ($_GET['view'] == 'edit') : ?>
             <td> <input class="button" type="submit" value="Save"></td>
             <?php endif; ?>
-            <td> <a class="link" href="../../index.php?path=ContactsController&list_id=<?= $_GET['id'];?>">Cancel</a> </td>
+            <td> <a class="link" href="../../index.php?controller=ContactsController&action=show&list_id=<?= $_GET['id'];?>">Cancel</a> </td>
         </tr>
     </table>
 </form>

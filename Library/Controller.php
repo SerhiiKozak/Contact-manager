@@ -1,8 +1,25 @@
 <?php
 
+require_once ROOT_PATH . '/Library/Session.php';
+
 abstract class Controller {
-  protected $data = null;
-  abstract public function __construct();
-  abstract public function getData();
-  abstract public function returnPage();
+  protected $request = null;
+  protected $response = null;
+
+  /**
+   * @var Session
+   */
+  protected $session = null;
+
+  public function __construct() {
+    $this->request = $this->getData();
+    $this->response = $this->setData();
+    $this->session = Session::getInstance();
+  }
+  protected function isAuterized() {
+    return empty($this->session->get('CONTACT_USER'));
+  }
+  public function getData() {}
+  public function setData() {}
+  public function show() {}
 }

@@ -2,7 +2,7 @@
 
 require_once ROOT_PATH . '/Library/Controller.php';
 require_once ROOT_PATH . '/Library/Session.php';
-require_once ROOT_PATH . '/Contact/Model/Contact.php';
+require_once ROOT_PATH . '/Models/Contact.php';
 
 class ContactsController extends Controller {
   public function __construct() {
@@ -27,7 +27,7 @@ class ContactsController extends Controller {
   public function returnPage() {
     $contacts = $this->data['contacts'];
     $fields = $this->data['fields'];
-    require_once ROOT_PATH . '/Contact/View/contactsView.phtml';
+    require_once ROOT_PATH . '/Views/contactsView.phtml';
   }
 }
 $contactsController = new ContactsController();

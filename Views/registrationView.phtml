@@ -6,21 +6,21 @@
   </head>
   <body>
     <a class="link-back" href="../../index.php">Back</a>
-    <form class="inform" action="../../index.php?path=registration" method="post">
+    <form class="inform" action="../../index.php?controller=RegistrationController&action=registrate    " method="post">
         <h1>Registration</h1>
         <?php echo !empty($_GET['message'])? $_GET['message'] : ""  ?>
           <table class="form-table">
             <tr>
               <td>First Name</td>
-              <td> <input type="text" name="first_name" value="<?= $data['first']; ?>"> </td>
+              <td> <input type="text" name="first_name" value="<?= $request['first']; ?>"> </td>
             </tr>
             <tr>
               <td>Last Name</td>
-              <td> <input type="text" name="last_name" value="<?= $data['last']; ?>"> </td>
+              <td> <input type="text" name="last_name" value="<?= $request['last']; ?>"> </td>
             </tr>
             <tr>
               <td>E-mail</td>
-              <td> <input type="text" name="email" value="<?= $data['email']; ?>"> </td>
+              <td> <input type="text" name="email" value="<?= $request['email']; ?>"> </td>
             </tr>
             <tr>
               <td>Password</td>

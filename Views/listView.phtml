@@ -5,8 +5,8 @@
     <title>Edit list</title>
 </head>
 <body>
-<a class="link-back" href="../../index.php?path=ListsController">Back</a>
-<a class="link-logout" href="../../index.php?path=logout">Logout</a>
+<a class="link-back" href="../../index.php?controller=ListsController&action=show">Back</a>
+<a class="link-logout" href="../../index.php?controller=LogoutController&action=logout">Logout</a>
 <form action="../../index.php?path=editList&id=<?= $_GET['id']?>" method="post">
     <p>Enter new list name.</p>
     <input type="text" name="newListName" value="<?= $listName;?>">

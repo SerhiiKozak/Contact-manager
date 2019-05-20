@@ -2,7 +2,7 @@
 
 require_once ROOT_PATH . '/Library/Controller.php';
 require_once ROOT_PATH . '/Library/Session.php';
-require_once ROOT_PATH . '/List/Model/ListContacts.php';
+require_once ROOT_PATH . '/Models/ListContacts.php';
 
 class ListsController extends Controller {
   public function __construct() {
@@ -22,11 +22,8 @@ class ListsController extends Controller {
 
   }
 
-  public function returnPage() {
+  public function show() {
     $lists = $this->data;
-    require_once ROOT_PATH . '/List/View/listsView.phtml';
+    require_once ROOT_PATH . '/Views/listsView.phtml';
   }
 }
-
-$listsController = new ListsController();
-$listsController->returnPage();
