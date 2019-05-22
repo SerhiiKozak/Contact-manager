@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Lists</title>
+    <link rel="stylesheet" href="/css/main.css">
 </head>
+<header>
+    <h2>Contact Manager</h2>
+    <div class="menu">
+        <a class="link-logout" href="../../index.php?controller=LogoutController&action=logout">Logout</a>
+    </div>
+</header>
 <body>
-<a class="link-logout" href="../../index.php?controller=LogoutController&action=logout">Logout</a>
 <h2>Create new list</h2>
-<div class="message"><?= $_GET['message']?></div>>
+<div class="message"><?= $_GET['message']?></div>
 <form action="../../index.php?controller=ListController&action=add" method="post">
-    <h4>List name</h4>
-    <input type="text" name="listName" >
-    <input class="button" name="submit" type="submit" value="Create">
+    <table>
+        <tr>
+            <td>
+                <h4>List name</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="listName" >
+            </td>
+            <td>
+                <input class="button" name="submit" type="submit" value="Create">
+            </td>
+        </tr>
+    </table>
 </form>
 <table class="lists-table">
-    <tr>
+    <thead>
         <td>List name</td>
         <td>Action</td>
-    </tr>
+    </thead>
     <?php foreach ($lists as $key => $list) :?>
         <?php if ($list['status'] == '1') :?>
         <tr>

@@ -15,6 +15,11 @@ header {
     box-shadow: 0px 2px 4px rgba(44 ,62, 60, 0.15);
 }
 
+a{
+    text-decoration: none;
+    color: #25b99a;
+}
+
 header h2 {
     margin: 15px;
 }
@@ -25,9 +30,81 @@ header h2 {
     right: 40px;
 }
 
-.link, .link-registration, .link-back{
+form {
+    font-family: Ubuntu;
+    color: #25b99a;
+    font-size: 19px;
+}
+
+table {
+    font-family: Ubuntu;
+    color: #25b99a;
+    border-collapse: collapse;
+}
+
+thead {
+    background: #25b99a;
+    color: #FFFFFF;
+}
+
+.lists-table tr td {
+    height: 30px;
+    border: solid 1px #25b99a;
+    padding: 2px;
+}
+
+form input {
+    height: 25px;
+    border-radius: 5px;
+    border: solid 1px #25b99a;
+    font-family: Ubuntu;
+    color: #25b99a;
+    padding: 0 0 0 5px;
+}
+
+.inform {
+    position: fixed;
+    top: 80px;
+    left: 350px;
+}
+
+
+.inform .button {
+    height: 30px;
+}
+
+.message {
+    color: #FF0000;
+}
+
+.link, .link-registration, .link-back, .link-logout{
     width: 90px;
     height: 60px;
+    background: #FFFFFF;
+    border: solid 1px #25b99a;
+    border-radius: 10px;
+    text-align: center;
+    font-family: Ubuntu;
+    font-size: 19px;
+    padding: 2px;
+}
+
+.link:hover, .link-registration:hover, .link-back:hover, .link-logout:hover{
+    width: 90px;
+    height: 60px;
+    background: #25b99a;
+    border: solid 1px #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+    color: #FFFFFF;
+    font-family: Ubuntu;
+    font-size: 19px;
+    padding: 2px;
+}
+
+.button {
+    width: 72px;
+    height: 28px;
     background: #FFFFFF;
     border: solid 1px #25b99a;
     border-radius: 10px;
@@ -39,9 +116,9 @@ header h2 {
     padding: 2px;
 }
 
-.link:hover, .link-registration:hover, .link-back:hover{
-    width: 90px;
-    height: 60px;
+.button:hover {
+    width: 72px;
+    height: 28px;
     background: #25b99a;
     border: solid 1px #FFFFFF;
     border-radius: 10px;

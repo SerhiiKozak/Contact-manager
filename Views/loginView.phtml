@@ -7,12 +7,12 @@
 <header>
     <h2>Contact Manager</h2>
     <div class="menu">
-        <a class="link-registration" href="../../index.php?path=RegistrationController">Registration</a>
+        <a class="link-registration" href="../../index.php?controller=RegistrationController&action=show">Registration</a>
     </div>
 </header>
 <body>
     <form class="inform" action="../../index.php?controller=LoginController&action=login" method="post">
-        <h1>Login</h1>
+        <h3>Login</h3>
         <div class="message"><?= $_GET['message']; ?></div>
         <table class="form-table">
             <tr>
